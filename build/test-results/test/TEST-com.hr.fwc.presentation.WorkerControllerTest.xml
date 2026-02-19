@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.hr.fwc.presentation.WorkerControllerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-02-19T14:47:10.299Z" hostname="mojaeyeong-ui-MacBookPro.local" time="0.079">
+  <properties/>
+  <testcase name="근로자 등록 API 요청" classname="com.hr.fwc.presentation.WorkerControllerTest" time="0.079"/>
+  <system-out><![CDATA[2026-02-19T23:47:10.101+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.hr.fwc.presentation.WorkerControllerTest]: WorkerControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-02-19T23:47:10.109+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.hr.fwc.ForeignWorkerComplianceApplication for test class com.hr.fwc.presentation.WorkerControllerTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.7)
+
+2026-02-19T23:47:10.118+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] c.h.f.presentation.WorkerControllerTest  : Starting WorkerControllerTest using Java 21.0.10 with PID 44837 (started by mojaeyeong in /Users/mojaeyeong/Documents/ownProject/foreign-worker-compliance)
+2026-02-19T23:47:10.118+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] c.h.f.presentation.WorkerControllerTest  : No active profile set, falling back to 1 default profile: "default"
+2026-02-19T23:47:10.289+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-02-19T23:47:10.289+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-02-19T23:47:10.290+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-02-19T23:47:10.296+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] c.h.f.presentation.WorkerControllerTest  : Started WorkerControllerTest in 0.185 seconds (process running for 2.225)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
