@@ -35,10 +35,18 @@ jobs:
         EXISTING=$(gh pr list --head "$BRANCH" --base develop --json number -q '.[0].number')
         
         if [ -z "$EXISTING" ]; then
+          gh label create "$TYPE" --color "0366d6" --description "Auto-generated $TYPE label" 2>/dev/null || true
+          gh label create "auto-generated" --color "cccccc" --description "Auto-generated PR" 2>/dev/null || true
+          
           gh pr create \
             --base develop \
             --head "$BRANCH" \
             --title "[$TYPE_UPPER] ${{ github.event.head_commit.message }}" \
             --body "Auto-generated PR from $BRANCH" \
-            --label "$TYPE,auto-generated"
+            --label "$TYPE,auto-generated" 2>/dev/null || \
+          gh pr create \
+            --base develop \
+            --head "$BRANCH" \
+            --title "[$TYPE_UPPER] ${{ github.event.head_commit.message }}" \
+            --body "Auto-generated PR from $BRANCH"
         fi
