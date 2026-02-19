@@ -2,6 +2,7 @@ package com.hr.fwc.domain.worker;
 
 public enum VisaType {
     E9("고용허가제 일반외국인"),
+    E8("계절근로자"),
     H2("외국국적동포"),
     E7("특정활동 전문직"),
     E7_4("숙련기능인력"),
