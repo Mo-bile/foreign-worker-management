@@ -432,3 +432,9 @@ MIT License
 
 > **"외국인 근로자 없인 하루도 못 버티는데, 관리는 엑셀로?"**  
 > 이제 자동화합시다.
+
+## 테스트
+GitHub Actions 자동화 파이프라인 테스트 중
+
+
+## Workflow Fix Applied
