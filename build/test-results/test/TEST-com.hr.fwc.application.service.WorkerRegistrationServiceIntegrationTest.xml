@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.hr.fwc.application.service.WorkerRegistrationServiceIntegrationTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-02-19T15:03:42.501Z" hostname="mojaeyeong-ui-MacBookPro.local" time="0.011">
+<testsuite name="com.hr.fwc.application.service.WorkerRegistrationServiceIntegrationTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-02-19T15:42:35.809Z" hostname="mojaeyeong-ui-MacBookPro.local" time="0.012">
   <properties/>
   <testcase name="미국 E-7 근로자 등록 시 국민연금 면제 확인" classname="com.hr.fwc.application.service.WorkerRegistrationServiceIntegrationTest" time="0.005"/>
   <testcase name="F-6 결혼이민자 등록 시 고용보험 의무가입 확인" classname="com.hr.fwc.application.service.WorkerRegistrationServiceIntegrationTest" time="0.003"/>
   <testcase name="베트남 E-9 근로자 등록 시 보험 판단 및 데드라인 생성" classname="com.hr.fwc.application.service.WorkerRegistrationServiceIntegrationTest" time="0.003"/>
-  <system-out><![CDATA[2026-02-20T00:03:42.499+09:00  INFO 47840 --- [foreign-worker-compliance] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.hr.fwc.application.service.WorkerRegistrationServiceIntegrationTest]: WorkerRegistrationServiceIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2026-02-20T00:03:42.500+09:00  INFO 47840 --- [foreign-worker-compliance] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.hr.fwc.ForeignWorkerComplianceApplication for test class com.hr.fwc.application.service.WorkerRegistrationServiceIntegrationTest
+  <system-out><![CDATA[2026-02-20T00:42:35.807+09:00  INFO 56145 --- [foreign-worker-compliance] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.hr.fwc.application.service.WorkerRegistrationServiceIntegrationTest]: WorkerRegistrationServiceIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-02-20T00:42:35.808+09:00  INFO 56145 --- [foreign-worker-compliance] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.hr.fwc.ForeignWorkerComplianceApplication for test class com.hr.fwc.application.service.WorkerRegistrationServiceIntegrationTest
 Hibernate: insert into foreign_workers (created_at,contract_end_date,contract_start_date,workplace_id,nationality,contact_email,contact_phone,name,passport_number,updated_at,entry_date,registration_number,visa_expiry_date,visa_type,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 Hibernate: insert into compliance_deadlines (deadline_type,description,due_date,status,worker_id,id) values (?,?,?,?,?,default)
 Hibernate: insert into compliance_deadlines (deadline_type,description,due_date,status,worker_id,id) values (?,?,?,?,?,default)
