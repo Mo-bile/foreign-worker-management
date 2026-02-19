@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.358s</div>
+<div class="counter">0.427s</div>
 <p>duration</p>
 </div>
 </td>
@@ -84,13 +84,13 @@
 <tr>
 <td class="success">기한 초과 데드라인 조회</td>
 <td class="success">getOverdueDeadlines()</td>
-<td class="success">0.005s</td>
+<td class="success">0.006s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">임박한 데드라인 조회 (30일 이내)</td>
 <td class="success">getUpcomingDeadlines()</td>
-<td class="success">0.348s</td>
+<td class="success">0.416s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -104,8 +104,8 @@
 <div class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>23:47:08.384 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.hr.fwc.application.service.ComplianceDashboardServiceIntegrationTest]: ComplianceDashboardServiceIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-23:47:08.417 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.hr.fwc.ForeignWorkerComplianceApplication for test class com.hr.fwc.application.service.ComplianceDashboardServiceIntegrationTest
+<pre>00:03:40.055 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.hr.fwc.application.service.ComplianceDashboardServiceIntegrationTest]: ComplianceDashboardServiceIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+00:03:40.094 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.hr.fwc.ForeignWorkerComplianceApplication for test class com.hr.fwc.application.service.ComplianceDashboardServiceIntegrationTest
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -116,29 +116,29 @@
 
  :: Spring Boot ::                (v3.3.7)
 
-2026-02-19T23:47:08.526+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] omplianceDashboardServiceIntegrationTest : Starting ComplianceDashboardServiceIntegrationTest using Java 21.0.10 with PID 44837 (started by mojaeyeong in /Users/mojaeyeong/Documents/ownProject/foreign-worker-compliance)
-2026-02-19T23:47:08.527+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] omplianceDashboardServiceIntegrationTest : No active profile set, falling back to 1 default profile: &quot;default&quot;
-2026-02-19T23:47:08.732+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-02-19T23:47:08.755+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 20 ms. Found 3 JPA repository interfaces.
-2026-02-19T23:47:08.888+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-02-19T23:47:08.909+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
-2026-02-19T23:47:08.921+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-02-19T23:47:09.021+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-02-19T23:47:09.033+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-02-19T23:47:09.092+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:fwcdb user=SA
-2026-02-19T23:47:09.093+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-02-19T23:47:09.102+09:00  WARN 44837 --- [foreign-worker-compliance] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-02-19T23:47:09.399+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-20T00:03:40.214+09:00  INFO 47840 --- [foreign-worker-compliance] [    Test worker] omplianceDashboardServiceIntegrationTest : Starting ComplianceDashboardServiceIntegrationTest using Java 21.0.10 with PID 47840 (started by mojaeyeong in /Users/mojaeyeong/Documents/ownProject/foreign-worker-compliance)
+2026-02-20T00:03:40.214+09:00  INFO 47840 --- [foreign-worker-compliance] [    Test worker] omplianceDashboardServiceIntegrationTest : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2026-02-20T00:03:40.425+09:00  INFO 47840 --- [foreign-worker-compliance] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-20T00:03:40.447+09:00  INFO 47840 --- [foreign-worker-compliance] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 19 ms. Found 3 JPA repository interfaces.
+2026-02-20T00:03:40.605+09:00  INFO 47840 --- [foreign-worker-compliance] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-20T00:03:40.625+09:00  INFO 47840 --- [foreign-worker-compliance] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-02-20T00:03:40.637+09:00  INFO 47840 --- [foreign-worker-compliance] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-02-20T00:03:40.733+09:00  INFO 47840 --- [foreign-worker-compliance] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-20T00:03:40.743+09:00  INFO 47840 --- [foreign-worker-compliance] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-02-20T00:03:40.803+09:00  INFO 47840 --- [foreign-worker-compliance] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:fwcdb user=SA
+2026-02-20T00:03:40.804+09:00  INFO 47840 --- [foreign-worker-compliance] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-02-20T00:03:40.813+09:00  WARN 47840 --- [foreign-worker-compliance] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-20T00:03:41.448+09:00  INFO 47840 --- [foreign-worker-compliance] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 Hibernate: drop table if exists compliance_deadlines cascade 
 Hibernate: drop table if exists foreign_workers cascade 
 Hibernate: drop table if exists workplaces cascade 
 Hibernate: create table compliance_deadlines (due_date date not null, id bigint generated by default as identity, worker_id bigint not null, description varchar(500), deadline_type enum ('CHANGE_REPORT','CONTRACT_RENEWAL','INSURANCE_ENROLLMENT','VISA_EXPIRY') not null, status enum ('APPROACHING','COMPLETED','OVERDUE','PENDING','URGENT') not null, primary key (id))
-Hibernate: create table foreign_workers (contract_end_date date, contract_start_date date not null, entry_date date not null, visa_expiry_date date not null, created_at timestamp(6) not null, id bigint generated by default as identity, updated_at timestamp(6) not null, workplace_id bigint, contact_phone varchar(20), registration_number varchar(20), passport_number varchar(50), contact_email varchar(100), name varchar(100) not null, nationality enum ('AUSTRALIA','BANGLADESH','CAMBODIA','CANADA','CHINA','FRANCE','GERMANY','INDONESIA','JAPAN','KAZAKHSTAN','KYRGYZSTAN','MONGOLIA','MYANMAR','NEPAL','NEW_ZEALAND','PAKISTAN','PHILIPPINES','SRI_LANKA','TAJIKISTAN','THAILAND','UK','USA','UZBEKISTAN','VIETNAM') not null, visa_type enum ('E7','E7_4','E9','F2','F5','F6','H2') not null, primary key (id))
+Hibernate: create table foreign_workers (contract_end_date date, contract_start_date date not null, entry_date date not null, visa_expiry_date date not null, created_at timestamp(6) not null, id bigint generated by default as identity, updated_at timestamp(6) not null, workplace_id bigint, contact_phone varchar(20), registration_number varchar(20), passport_number varchar(50), contact_email varchar(100), name varchar(100) not null, nationality enum ('AUSTRALIA','BANGLADESH','CAMBODIA','CANADA','CHINA','FRANCE','GERMANY','INDONESIA','JAPAN','KAZAKHSTAN','KYRGYZSTAN','MONGOLIA','MYANMAR','NEPAL','NEW_ZEALAND','PAKISTAN','PHILIPPINES','SRI_LANKA','TAJIKISTAN','THAILAND','UK','USA','UZBEKISTAN','VIETNAM') not null, visa_type enum ('E7','E7_4','E8','E9','F2','F5','F6','H2') not null, primary key (id))
 Hibernate: create table workplaces (created_at timestamp(6) not null, id bigint generated by default as identity, business_number varchar(20) not null, contact_phone varchar(20), name varchar(100) not null, address varchar(200), primary key (id))
-2026-02-19T23:47:09.412+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-02-19T23:47:09.582+09:00  WARN 44837 --- [foreign-worker-compliance] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-02-19T23:47:09.691+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:fwcdb'
-2026-02-19T23:47:09.713+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] omplianceDashboardServiceIntegrationTest : Started ComplianceDashboardServiceIntegrationTest in 1.25 seconds (process running for 1.642)
+2026-02-20T00:03:41.518+09:00  INFO 47840 --- [foreign-worker-compliance] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-20T00:03:41.878+09:00  WARN 47840 --- [foreign-worker-compliance] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-20T00:03:42.029+09:00  INFO 47840 --- [foreign-worker-compliance] [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:fwcdb'
+2026-02-20T00:03:42.063+09:00  INFO 47840 --- [foreign-worker-compliance] [    Test worker] omplianceDashboardServiceIntegrationTest : Started ComplianceDashboardServiceIntegrationTest in 1.919 seconds (process running for 2.331)
 Hibernate: insert into compliance_deadlines (deadline_type,description,due_date,status,worker_id,id) values (?,?,?,?,?,default)
 Hibernate: insert into compliance_deadlines (deadline_type,description,due_date,status,worker_id,id) values (?,?,?,?,?,default)
 Hibernate: insert into compliance_deadlines (deadline_type,description,due_date,status,worker_id,id) values (?,?,?,?,?,default)
@@ -180,7 +180,7 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="https://www.gradle.org">Gradle 9.0.0</a> at Feb 19, 2026, 11:47:10 PM</p>
+<a href="https://www.gradle.org">Gradle 9.0.0</a> at Feb 20, 2026, 12:03:42 AM</p>
 </div>
 </div>
 </body>

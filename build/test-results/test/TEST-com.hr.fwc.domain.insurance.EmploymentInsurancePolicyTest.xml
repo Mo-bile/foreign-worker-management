@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.hr.fwc.domain.insurance.EmploymentInsurancePolicyTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-02-19T14:47:10.095Z" hostname="mojaeyeong-ui-MacBookPro.local" time="0.001">
+<testsuite name="com.hr.fwc.domain.insurance.EmploymentInsurancePolicyTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-02-19T15:03:42.514Z" hostname="mojaeyeong-ui-MacBookPro.local" time="0.001">
   <properties/>
-  <testcase name="E-9, H-2, E-7 비자는 고용보험 임의가입" classname="com.hr.fwc.domain.insurance.EmploymentInsurancePolicyTest" time="0.0"/>
+  <testcase name="E-9, H-2, E-7 비자는 고용보험 임의가입" classname="com.hr.fwc.domain.insurance.EmploymentInsurancePolicyTest" time="0.001"/>
   <testcase name="F-2, F-5, F-6 비자는 고용보험 의무가입" classname="com.hr.fwc.domain.insurance.EmploymentInsurancePolicyTest" time="0.0"/>
   <testcase name="E-7-4 숙련기능인력도 임의가입" classname="com.hr.fwc.domain.insurance.EmploymentInsurancePolicyTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
