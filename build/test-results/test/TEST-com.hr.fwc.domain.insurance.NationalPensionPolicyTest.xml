@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.hr.fwc.domain.insurance.NationalPensionPolicyTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-02-19T15:03:42.517Z" hostname="mojaeyeong-ui-MacBookPro.local" time="0.0">
+<testsuite name="com.hr.fwc.domain.insurance.NationalPensionPolicyTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-02-19T15:42:35.825Z" hostname="mojaeyeong-ui-MacBookPro.local" time="0.001">
   <properties/>
   <testcase name="사회보장협정 체결국 국적자는 국민연금 면제" classname="com.hr.fwc.domain.insurance.NationalPensionPolicyTest" time="0.0"/>
   <testcase name="일본도 사회보장협정 미체결국으로 의무가입" classname="com.hr.fwc.domain.insurance.NationalPensionPolicyTest" time="0.0"/>
