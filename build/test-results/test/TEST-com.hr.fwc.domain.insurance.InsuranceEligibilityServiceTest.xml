@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.hr.fwc.domain.insurance.InsuranceEligibilityServiceTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-02-19T15:42:35.824Z" hostname="mojaeyeong-ui-MacBookPro.local" time="0.001">
-  <properties/>
-  <testcase name="F-6 결혼이민자는 고용보험도 의무가입" classname="com.hr.fwc.domain.insurance.InsuranceEligibilityServiceTest" time="0.001"/>
-  <testcase name="베트남 E-9 근로자의 4대보험 판단" classname="com.hr.fwc.domain.insurance.InsuranceEligibilityServiceTest" time="0.0"/>
-  <testcase name="미국 E-7 근로자의 4대보험 판단 - 국민연금 면제" classname="com.hr.fwc.domain.insurance.InsuranceEligibilityServiceTest" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
