@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - ComplianceDashboardServiceIntegrationTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>ComplianceDashboardServiceIntegrationTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/com.hr.fwc.application.service.html">com.hr.fwc.application.service</a> &gt; ComplianceDashboardServiceIntegrationTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">3</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.358s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="tab-container">
+<ul class="tabLinks">
+<li>
+<a href="#">Tests</a>
+</li>
+<li>
+<a href="#">Standard output</a>
+</li>
+<li>
+<a href="#">Standard error</a>
+</li>
+</ul>
+<div class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Method name</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">기한 초과 데드라인 조회</td>
+<td class="success">getOverdueDeadlines()</td>
+<td class="success">0.005s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">임박한 데드라인 조회 (30일 이내)</td>
+<td class="success">getUpcomingDeadlines()</td>
+<td class="success">0.348s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">특정 근로자의 데드라인 조회</td>
+<td class="success">getWorkerDeadlines()</td>
+<td class="success">0.005s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>23:47:08.384 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.hr.fwc.application.service.ComplianceDashboardServiceIntegrationTest]: ComplianceDashboardServiceIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+23:47:08.417 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.hr.fwc.ForeignWorkerComplianceApplication for test class com.hr.fwc.application.service.ComplianceDashboardServiceIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.7)
+
+2026-02-19T23:47:08.526+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] omplianceDashboardServiceIntegrationTest : Starting ComplianceDashboardServiceIntegrationTest using Java 21.0.10 with PID 44837 (started by mojaeyeong in /Users/mojaeyeong/Documents/ownProject/foreign-worker-compliance)
+2026-02-19T23:47:08.527+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] omplianceDashboardServiceIntegrationTest : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2026-02-19T23:47:08.732+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-19T23:47:08.755+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 20 ms. Found 3 JPA repository interfaces.
+2026-02-19T23:47:08.888+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-19T23:47:08.909+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-02-19T23:47:08.921+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-02-19T23:47:09.021+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-19T23:47:09.033+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-02-19T23:47:09.092+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:fwcdb user=SA
+2026-02-19T23:47:09.093+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-02-19T23:47:09.102+09:00  WARN 44837 --- [foreign-worker-compliance] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-19T23:47:09.399+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: drop table if exists compliance_deadlines cascade 
+Hibernate: drop table if exists foreign_workers cascade 
+Hibernate: drop table if exists workplaces cascade 
+Hibernate: create table compliance_deadlines (due_date date not null, id bigint generated by default as identity, worker_id bigint not null, description varchar(500), deadline_type enum ('CHANGE_REPORT','CONTRACT_RENEWAL','INSURANCE_ENROLLMENT','VISA_EXPIRY') not null, status enum ('APPROACHING','COMPLETED','OVERDUE','PENDING','URGENT') not null, primary key (id))
+Hibernate: create table foreign_workers (contract_end_date date, contract_start_date date not null, entry_date date not null, visa_expiry_date date not null, created_at timestamp(6) not null, id bigint generated by default as identity, updated_at timestamp(6) not null, workplace_id bigint, contact_phone varchar(20), registration_number varchar(20), passport_number varchar(50), contact_email varchar(100), name varchar(100) not null, nationality enum ('AUSTRALIA','BANGLADESH','CAMBODIA','CANADA','CHINA','FRANCE','GERMANY','INDONESIA','JAPAN','KAZAKHSTAN','KYRGYZSTAN','MONGOLIA','MYANMAR','NEPAL','NEW_ZEALAND','PAKISTAN','PHILIPPINES','SRI_LANKA','TAJIKISTAN','THAILAND','UK','USA','UZBEKISTAN','VIETNAM') not null, visa_type enum ('E7','E7_4','E9','F2','F5','F6','H2') not null, primary key (id))
+Hibernate: create table workplaces (created_at timestamp(6) not null, id bigint generated by default as identity, business_number varchar(20) not null, contact_phone varchar(20), name varchar(100) not null, address varchar(200), primary key (id))
+2026-02-19T23:47:09.412+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-19T23:47:09.582+09:00  WARN 44837 --- [foreign-worker-compliance] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-19T23:47:09.691+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:fwcdb'
+2026-02-19T23:47:09.713+09:00  INFO 44837 --- [foreign-worker-compliance] [    Test worker] omplianceDashboardServiceIntegrationTest : Started ComplianceDashboardServiceIntegrationTest in 1.25 seconds (process running for 1.642)
+Hibernate: insert into compliance_deadlines (deadline_type,description,due_date,status,worker_id,id) values (?,?,?,?,?,default)
+Hibernate: insert into compliance_deadlines (deadline_type,description,due_date,status,worker_id,id) values (?,?,?,?,?,default)
+Hibernate: insert into compliance_deadlines (deadline_type,description,due_date,status,worker_id,id) values (?,?,?,?,?,default)
+Hibernate: insert into compliance_deadlines (deadline_type,description,due_date,status,worker_id,id) values (?,?,?,?,?,default)
+Hibernate: insert into compliance_deadlines (deadline_type,description,due_date,status,worker_id,id) values (?,?,?,?,?,default)
+Hibernate: select cd1_0.id,cd1_0.deadline_type,cd1_0.description,cd1_0.due_date,cd1_0.status,cd1_0.worker_id from compliance_deadlines cd1_0 where cd1_0.due_date&lt;? and cd1_0.status&lt;&gt;?
+Hibernate: insert into compliance_deadlines (deadline_type,description,due_date,status,worker_id,id) values (?,?,?,?,?,default)
+Hibernate: insert into compliance_deadlines (deadline_type,description,due_date,status,worker_id,id) values (?,?,?,?,?,default)
+Hibernate: insert into compliance_deadlines (deadline_type,description,due_date,status,worker_id,id) values (?,?,?,?,?,default)
+Hibernate: insert into compliance_deadlines (deadline_type,description,due_date,status,worker_id,id) values (?,?,?,?,?,default)
+Hibernate: insert into compliance_deadlines (deadline_type,description,due_date,status,worker_id,id) values (?,?,?,?,?,default)
+Hibernate: insert into compliance_deadlines (deadline_type,description,due_date,status,worker_id,id) values (?,?,?,?,?,default)
+Hibernate: insert into compliance_deadlines (deadline_type,description,due_date,status,worker_id,id) values (?,?,?,?,?,default)
+Hibernate: select cd1_0.id,cd1_0.deadline_type,cd1_0.description,cd1_0.due_date,cd1_0.status,cd1_0.worker_id from compliance_deadlines cd1_0 where cd1_0.worker_id=?
+Hibernate: insert into compliance_deadlines (deadline_type,description,due_date,status,worker_id,id) values (?,?,?,?,?,default)
+Hibernate: insert into compliance_deadlines (deadline_type,description,due_date,status,worker_id,id) values (?,?,?,?,?,default)
+Hibernate: insert into compliance_deadlines (deadline_type,description,due_date,status,worker_id,id) values (?,?,?,?,?,default)
+Hibernate: insert into compliance_deadlines (deadline_type,description,due_date,status,worker_id,id) values (?,?,?,?,?,default)
+Hibernate: insert into compliance_deadlines (deadline_type,description,due_date,status,worker_id,id) values (?,?,?,?,?,default)
+Hibernate: select cd1_0.id,cd1_0.deadline_type,cd1_0.description,cd1_0.due_date,cd1_0.status,cd1_0.worker_id from compliance_deadlines cd1_0 where cd1_0.status in (?)
+</pre>
+</span>
+</div>
+<div class="tab">
+<h2>Standard error</h2>
+<span class="code">
+<pre>WARNING: A Java agent has been loaded dynamically (/Users/mojaeyeong/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.14.19/154da3a65b4f4a909d3e5bdec55d1b2b4cbb6ce1/byte-buddy-agent-1.14.19.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="https://www.gradle.org">Gradle 9.0.0</a> at Feb 19, 2026, 11:47:10 PM</p>
+</div>
+</div>
+</body>
+</html>
