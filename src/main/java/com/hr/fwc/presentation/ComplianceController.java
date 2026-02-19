@@ -2,6 +2,7 @@ package com.hr.fwc.presentation;
 
 import com.hr.fwc.application.service.ComplianceDashboardService;
 import com.hr.fwc.domain.compliance.ComplianceDeadline;
+import com.hr.fwc.presentation.api.ComplianceApi;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/compliance")
-public class ComplianceController {
+public class ComplianceController implements ComplianceApi {
 
     private final ComplianceDashboardService dashboardService;
 
