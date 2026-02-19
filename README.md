@@ -12,6 +12,7 @@
 | **프로젝트 소개** | [취지](#-프로젝트-취지) · [아키텍처](#-아키텍처) · [기술 스택](#기술-스택) |
 | **현재 상황** | [구현 완료](#-현재-상황-mvp-v01) · [진행 예정](#-진행-예정) |
 | **법적 근거** | [국민연금](#1-국민연금-적용-정책) · [고용보험](#2-고용보험-적용-정책) · [건강보험](#3-건강보험-적용-정책) · [산재보험](#4-산재보험-적용-정책) · [고용변동 신고](#5-고용변동-신고-의무) |
+| **개발** | [Git Flow](./GIT_FLOW.md) · [기여하기](./CONTRIBUTING.md) |
 | **시작하기** | [로컬 실행](#-시작하기) · [API 테스트](#api-테스트) |
 | **변경 로그** | [2026년 2월 업데이트](#-주요-변경사항-로그) |
 
@@ -308,6 +309,43 @@ ComplianceDeadline.create(
 | **P2** | 알림 기능 (Email/SMS) | 1주 |
 | **P3** | 정부 서식 자동 생성 | 2주 |
 | **P4** | 다국어 지원 (근로자용) | 2주 |
+
+---
+
+## 👨‍💻 개발 워크플로우
+
+이 프로젝트는 **Git Flow** 브랜치 전략을 사용합니다.
+
+### 브랜치 구조
+
+| 브랜치 | 설명 | 사용법 |
+|--------|------|--------|
+| **main** | 프로덕션 배포 | 직접 푸시 금지, PR만 |
+| **develop** | 통합 개발 브랜치 | feature 브랜치 병합 대상 |
+| **feature/** | 새로운 기능 개발 | `feature/add-mysql-support` |
+| **hotfix/** | 긴급 버그 수정 | `hotfix/fix-encoding` |
+
+### 기여하기
+
+```bash
+# 1. develop 브랜치에서 시작
+git checkout develop
+git pull origin develop
+
+# 2. feature 브랜치 생성
+git checkout -b feature/your-feature-name
+
+# 3. 작업 후 커밋
+git add .
+git commit -m "[FEATURE] 설명"
+
+# 4. 원격에 푸시
+git push origin feature/your-feature-name
+
+# 5. GitHub에서 Pull Request 생성 (feature → develop)
+```
+
+자세한 내용은 [GIT_FLOW.md](./GIT_FLOW.md)와 [CONTRIBUTING.md](./CONTRIBUTING.md)를 참조하세요.
 
 ---
 
