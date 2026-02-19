@@ -5,12 +5,20 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class InsuranceEligibilityServiceTest {
 
-    private final InsuranceEligibilityService service = new InsuranceEligibilityService();
+    private final InsuranceEligibilityService service = new InsuranceEligibilityService(
+        List.of(
+            new NationalPensionPolicy(),
+            new HealthInsurancePolicy(),
+            new EmploymentInsurancePolicy(),
+            new IndustrialAccidentPolicy()
+        )
+    );
 
     @Test
     @DisplayName("베트남 E-9 근로자의 4대보험 판단")

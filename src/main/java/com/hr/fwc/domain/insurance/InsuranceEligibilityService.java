@@ -11,13 +11,8 @@ public class InsuranceEligibilityService {
 
     private final List<InsuranceEligibilityPolicy> policies;
 
-    public InsuranceEligibilityService() {
-        this.policies = List.of(
-            new NationalPensionPolicy(),
-            new HealthInsurancePolicy(),
-            new EmploymentInsurancePolicy(),
-            new IndustrialAccidentPolicy()
-        );
+    public InsuranceEligibilityService(List<InsuranceEligibilityPolicy> policies) {
+        this.policies = policies;
     }
 
     public List<InsuranceEligibility> determineAllEligibilities(ForeignWorker worker) {
