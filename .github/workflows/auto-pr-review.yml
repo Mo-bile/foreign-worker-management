@@ -1,0 +1,59 @@
+name: Auto PR
+
+on:
+  push:
+    branches-ignore:
+      - main
+      - develop
+      - 'release/**'
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Create PR
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+      run: |
+        BRANCH="${GITHUB_REF#refs/heads/}"
+        
+        if [[ $BRANCH =~ ^(feature|fix|docs|refactor|test)/ ]]; then
+          TYPE="${BASH_REMATCH[1]}"
+        else
+          TYPE="feature"
+        fi
+        
+        TYPE_UPPER=$(echo "$TYPE" | tr '[:lower:]' '[:upper:]')
+        COMMIT_SUBJECT="${COMMIT_MESSAGE%%$'\n'*}"
+        COMMIT_SUBJECT=$(printf '%s' "$COMMIT_SUBJECT" | tr '\r\n' ' ' | sed 's/[[:space:]]\+/ /g; s/^ //; s/ $//')
+        if [ -z "$COMMIT_SUBJECT" ]; then
+          COMMIT_SUBJECT="Auto-generated PR from $BRANCH"
+        fi
+        PR_TITLE="[$TYPE_UPPER] $COMMIT_SUBJECT"
+        
+        EXISTING=$(gh pr list --head "$BRANCH" --base develop --json number -q '.[0].number')
+        
+        if [ -z "$EXISTING" ]; then
+          gh label create "$TYPE" --color "0366d6" --description "Auto-generated $TYPE label" 2>/dev/null || true
+          gh label create "auto-generated" --color "cccccc" --description "Auto-generated PR" 2>/dev/null || true
+          
+          gh pr create \
+            --base develop \
+            --head "$BRANCH" \
+            --title "$PR_TITLE" \
+            --body "Auto-generated PR from $BRANCH" \
+            --label "$TYPE,auto-generated" 2>/dev/null || \
+          gh pr create \
+            --base develop \
+            --head "$BRANCH" \
+            --title "$PR_TITLE" \
+            --body "Auto-generated PR from $BRANCH"
+        fi

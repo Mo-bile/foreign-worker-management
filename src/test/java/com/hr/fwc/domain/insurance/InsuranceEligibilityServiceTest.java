@@ -5,12 +5,20 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class InsuranceEligibilityServiceTest {
 
-    private final InsuranceEligibilityService service = new InsuranceEligibilityService();
+    private final InsuranceEligibilityService service = new InsuranceEligibilityService(
+        List.of(
+            new NationalPensionPolicy(),
+            new HealthInsurancePolicy(),
+            new EmploymentInsurancePolicy(),
+            new IndustrialAccidentPolicy()
+        )
+    );
 
     @Test
     @DisplayName("베트남 E-9 근로자의 4대보험 판단")
@@ -20,7 +28,7 @@ class InsuranceEligibilityServiceTest {
         var results = service.determineAllEligibilities(worker);
 
         assertThat(results).hasSize(4);
-        assertThat(findByType(results, InsuranceType.NATIONAL_PENSION).status()).isEqualTo(EligibilityStatus.MANDATORY);
+        assertThat(findByType(results, InsuranceType.NATIONAL_PENSION).status()).isEqualTo(EligibilityStatus.EXEMPT);
         assertThat(findByType(results, InsuranceType.HEALTH_INSURANCE).status()).isEqualTo(EligibilityStatus.MANDATORY);
         assertThat(findByType(results, InsuranceType.EMPLOYMENT_INSURANCE).status()).isEqualTo(EligibilityStatus.OPTIONAL);
         assertThat(findByType(results, InsuranceType.INDUSTRIAL_ACCIDENT).status()).isEqualTo(EligibilityStatus.MANDATORY);
@@ -44,10 +52,9 @@ class InsuranceEligibilityServiceTest {
 
         var mandatory = service.getMandatoryInsurances(worker);
 
-        assertThat(mandatory).hasSize(4);
+        assertThat(mandatory).hasSize(3);
         assertThat(mandatory.stream().map(InsuranceEligibility::insuranceType))
             .containsExactlyInAnyOrder(
-                InsuranceType.NATIONAL_PENSION,
                 InsuranceType.HEALTH_INSURANCE,
                 InsuranceType.EMPLOYMENT_INSURANCE,
                 InsuranceType.INDUSTRIAL_ACCIDENT
