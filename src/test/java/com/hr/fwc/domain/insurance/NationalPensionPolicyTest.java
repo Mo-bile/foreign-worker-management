@@ -26,21 +26,21 @@ class NationalPensionPolicyTest {
     @Test
     @DisplayName("사회보장협정 미체결국 국적자는 국민연금 의무가입")
     void nonSsaCountryShouldBeMandatory() {
-        ForeignWorker vietnamWorker = createWorker(Nationality.VIETNAM, VisaType.E9);
+        ForeignWorker cambodiaWorker = createWorker(Nationality.CAMBODIA, VisaType.E9);
 
-        InsuranceEligibility result = policy.determineEligibility(vietnamWorker);
+        InsuranceEligibility result = policy.determineEligibility(cambodiaWorker);
 
         assertThat(result.status()).isEqualTo(EligibilityStatus.MANDATORY);
     }
 
     @Test
-    @DisplayName("일본도 사회보장협정 미체결국으로 의무가입")
-    void japanShouldBeMandatory() {
+    @DisplayName("일본은 사회보장협정 체결국으로 국민연금 면제")
+    void japanShouldBeExempt() {
         ForeignWorker japanWorker = createWorker(Nationality.JAPAN, VisaType.E7);
 
         InsuranceEligibility result = policy.determineEligibility(japanWorker);
 
-        assertThat(result.status()).isEqualTo(EligibilityStatus.MANDATORY);
+        assertThat(result.status()).isEqualTo(EligibilityStatus.EXEMPT);
     }
 
     private ForeignWorker createWorker(Nationality nationality, VisaType visaType) {

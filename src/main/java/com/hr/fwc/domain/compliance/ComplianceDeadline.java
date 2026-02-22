@@ -60,12 +60,13 @@ public class ComplianceDeadline {
 
     private DeadlineStatus calculateStatus(LocalDate dueDate) {
         long daysUntil = ChronoUnit.DAYS.between(LocalDate.now(), dueDate);
+        int[] thresholds = deadlineType.alertThresholds();
 
         if (daysUntil < 0) {
             return DeadlineStatus.OVERDUE;
-        } else if (daysUntil <= 7) {
+        } else if (daysUntil <= thresholds[2]) {
             return DeadlineStatus.URGENT;
-        } else if (daysUntil <= 30) {
+        } else if (daysUntil <= thresholds[1]) {
             return DeadlineStatus.APPROACHING;
         } else {
             return DeadlineStatus.PENDING;
