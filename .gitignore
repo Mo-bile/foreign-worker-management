@@ -8,12 +8,19 @@
 *.swo
 *~
 
+# Eclipse
+.classpath
+.project
+.settings/
+.factorypath
+
 # Build
 build/
 bin/
 out/
 .gradle/
 !gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
 
 # Compiled files
 *.class
@@ -28,6 +35,23 @@ logs/
 # OS
 .DS_Store
 Thumbs.db
+Desktop.ini
+
+# Environment / Secrets
+.env
+.env.*
+application-local.yml
+application-local.properties
+application-secret.yml
+application-secret.properties
+
+# H2 Database
+*.h2.db
+*.trace.db
+*.lock.db
+
+# Spring Boot
+*.pid
 
 # Test reports
 build/reports/
