@@ -21,6 +21,7 @@ jobs:
     - name: Create PR
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
       run: |
         BRANCH="${GITHUB_REF#refs/heads/}"
         
@@ -31,6 +32,12 @@ jobs:
         fi
         
         TYPE_UPPER=$(echo "$TYPE" | tr '[:lower:]' '[:upper:]')
+        COMMIT_SUBJECT="${COMMIT_MESSAGE%%$'\n'*}"
+        COMMIT_SUBJECT=$(printf '%s' "$COMMIT_SUBJECT" | tr '\r\n' ' ' | sed 's/[[:space:]]\+/ /g; s/^ //; s/ $//')
+        if [ -z "$COMMIT_SUBJECT" ]; then
+          COMMIT_SUBJECT="Auto-generated PR from $BRANCH"
+        fi
+        PR_TITLE="[$TYPE_UPPER] $COMMIT_SUBJECT"
         
         EXISTING=$(gh pr list --head "$BRANCH" --base develop --json number -q '.[0].number')
         
@@ -41,12 +48,12 @@ jobs:
           gh pr create \
             --base develop \
             --head "$BRANCH" \
-            --title "[$TYPE_UPPER] ${{ github.event.head_commit.message }}" \
+            --title "$PR_TITLE" \
             --body "Auto-generated PR from $BRANCH" \
             --label "$TYPE,auto-generated" 2>/dev/null || \
           gh pr create \
             --base develop \
             --head "$BRANCH" \
-            --title "[$TYPE_UPPER] ${{ github.event.head_commit.message }}" \
+            --title "$PR_TITLE" \
             --body "Auto-generated PR from $BRANCH"
         fi
