@@ -28,7 +28,7 @@ class InsuranceEligibilityServiceTest {
         var results = service.determineAllEligibilities(worker);
 
         assertThat(results).hasSize(4);
-        assertThat(findByType(results, InsuranceType.NATIONAL_PENSION).status()).isEqualTo(EligibilityStatus.MANDATORY);
+        assertThat(findByType(results, InsuranceType.NATIONAL_PENSION).status()).isEqualTo(EligibilityStatus.EXEMPT);
         assertThat(findByType(results, InsuranceType.HEALTH_INSURANCE).status()).isEqualTo(EligibilityStatus.MANDATORY);
         assertThat(findByType(results, InsuranceType.EMPLOYMENT_INSURANCE).status()).isEqualTo(EligibilityStatus.OPTIONAL);
         assertThat(findByType(results, InsuranceType.INDUSTRIAL_ACCIDENT).status()).isEqualTo(EligibilityStatus.MANDATORY);
@@ -52,10 +52,9 @@ class InsuranceEligibilityServiceTest {
 
         var mandatory = service.getMandatoryInsurances(worker);
 
-        assertThat(mandatory).hasSize(4);
+        assertThat(mandatory).hasSize(3);
         assertThat(mandatory.stream().map(InsuranceEligibility::insuranceType))
             .containsExactlyInAnyOrder(
-                InsuranceType.NATIONAL_PENSION,
                 InsuranceType.HEALTH_INSURANCE,
                 InsuranceType.EMPLOYMENT_INSURANCE,
                 InsuranceType.INDUSTRIAL_ACCIDENT
