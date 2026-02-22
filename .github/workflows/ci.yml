@@ -55,6 +55,7 @@ jobs:
         path: build/reports/tests/test/
 
   code-quality:
+    name: Code Quality (non-blocking)
     runs-on: ubuntu-latest
     needs: build-and-test
     
@@ -68,6 +69,11 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
         
-    - name: Check code style
-      run: ./gradlew checkstyleMain checkstyleTest || true
+    - name: Check code style (non-blocking)
+      run: |
+        if ./gradlew -q tasks --all | grep -q "checkstyleMain"; then
+          ./gradlew checkstyleMain checkstyleTest
+        else
+          echo "Checkstyle tasks are not configured. Skipping code style check."
+        fi
       continue-on-error: true
