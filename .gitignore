@@ -38,6 +38,6 @@ tmp/
 temp/
 *.tmp
 
-.settings
 .classpath
 .project
+.settings

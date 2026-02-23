@@ -1,22 +1,15 @@
 package com.hr.fwc.domain.worker;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
 import java.util.Objects;
 
-@Embeddable
 public class PersonalInfo {
 
-    @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(name = "passport_number", length = 50)
     private String passportNumber;
 
-    @Column(name = "contact_phone", length = 20)
     private String contactPhone;
 
-    @Column(name = "contact_email", length = 100)
     private String contactEmail;
 
     protected PersonalInfo() {

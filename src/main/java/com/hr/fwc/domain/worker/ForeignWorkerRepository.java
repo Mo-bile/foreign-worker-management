@@ -1,15 +1,14 @@
 package com.hr.fwc.domain.worker;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
+import java.util.Optional;
 
-@Repository
-public interface ForeignWorkerRepository extends JpaRepository<ForeignWorker, Long> {
+public interface ForeignWorkerRepository {
+    ForeignWorker save(ForeignWorker worker);
 
-    List<ForeignWorker> findByEmploymentInfoWorkplaceId(Long workplaceId);
+    Optional<ForeignWorker> findById(Long id);
+
+    List<ForeignWorker> findByWorkplaceId(Long workplaceId);
 
     List<ForeignWorker> findByNationality(Nationality nationality);
-
 }

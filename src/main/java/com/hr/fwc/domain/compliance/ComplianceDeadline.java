@@ -1,33 +1,21 @@
 package com.hr.fwc.domain.compliance;
 
-import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
-@Entity
-@Table(name = "compliance_deadlines")
 public class ComplianceDeadline {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "worker_id", nullable = false)
     private Long workerId;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "deadline_type", nullable = false, length = 30)
     private DeadlineType deadlineType;
 
-    @Column(name = "due_date", nullable = false)
     private LocalDate dueDate;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false, length = 20)
     private DeadlineStatus status;
 
-    @Column(name = "description", length = 500)
     private String description;
 
     protected ComplianceDeadline() {
@@ -43,6 +31,18 @@ public class ComplianceDeadline {
 
     public static ComplianceDeadline create(Long workerId, DeadlineType deadlineType, LocalDate dueDate, String description) {
         return new ComplianceDeadline(workerId, deadlineType, dueDate, description);
+    }
+
+    public static ComplianceDeadline reconstitute(Long id, Long workerId, DeadlineType deadlineType,
+                                                  LocalDate dueDate, DeadlineStatus status, String description) {
+        ComplianceDeadline d = new ComplianceDeadline();
+        d.id = id;
+        d.workerId = workerId;
+        d.deadlineType = deadlineType;
+        d.dueDate = dueDate;
+        d.status = status;
+        d.description = description;
+        return d;
     }
 
     public void updateDueDate(LocalDate newDueDate) {
