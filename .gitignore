@@ -37,3 +37,7 @@ build/test-results/
 tmp/
 temp/
 *.tmp
+
+.settings
+.classpath
+.project
