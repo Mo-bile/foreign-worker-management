@@ -1,20 +1,14 @@
 package com.hr.fwc.domain.worker;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@Embeddable
 public class EmploymentInfo {
 
-    @Column(name = "contract_start_date", nullable = false)
     private LocalDate contractStartDate;
 
-    @Column(name = "contract_end_date")
     private LocalDate contractEndDate;
 
-    @Column(name = "workplace_id")
     private Long workplaceId;
 
     protected EmploymentInfo() {

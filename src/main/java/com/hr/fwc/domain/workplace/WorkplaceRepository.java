@@ -1,13 +1,11 @@
 package com.hr.fwc.domain.workplace;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
 import java.util.Optional;
 
-@Repository
-public interface WorkplaceRepository extends JpaRepository<Workplace, Long> {
+public interface WorkplaceRepository {
+    Workplace save(Workplace workplace);
+
+    Optional<Workplace> findById(Long id);
 
     Optional<Workplace> findByBusinessNumber(String businessNumber);
-
 }

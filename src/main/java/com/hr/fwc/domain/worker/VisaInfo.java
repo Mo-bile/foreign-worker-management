@@ -1,26 +1,16 @@
 package com.hr.fwc.domain.worker;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@Embeddable
 public class VisaInfo {
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "visa_type", nullable = false, length = 10)
     private VisaType visaType;
 
-    @Column(name = "visa_expiry_date", nullable = false)
     private LocalDate visaExpiryDate;
 
-    @Column(name = "entry_date", nullable = false)
     private LocalDate entryDate;
 
-    @Column(name = "registration_number", length = 20)
     private String registrationNumber;
 
     protected VisaInfo() {
