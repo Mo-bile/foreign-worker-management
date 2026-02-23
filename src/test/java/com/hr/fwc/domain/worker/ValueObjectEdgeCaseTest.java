@@ -34,7 +34,8 @@ class ValueObjectEdgeCaseTest {
     @Test
     @DisplayName("EmploymentInfo: 계약 시작 전이면 비활성")
     void isActiveShouldBeFalseBeforeStartDate() {
-        EmploymentInfo info = EmploymentInfo.of(LocalDate.now().plusDays(30), null, 1L);
+        LocalDate baseDate = LocalDate.now();
+        EmploymentInfo info = EmploymentInfo.of(baseDate.plusDays(30), null, 1L);
 
         assertThat(info.isActive()).isFalse();
     }
@@ -42,7 +43,8 @@ class ValueObjectEdgeCaseTest {
     @Test
     @DisplayName("EmploymentInfo: 종료일 없으면 활성")
     void isActiveShouldBeTrueWhenNoEndDate() {
-        EmploymentInfo info = EmploymentInfo.of(LocalDate.now().minusDays(30), null, 1L);
+        LocalDate baseDate = LocalDate.now();
+        EmploymentInfo info = EmploymentInfo.of(baseDate.minusDays(30), null, 1L);
 
         assertThat(info.isActive()).isTrue();
     }
@@ -50,7 +52,8 @@ class ValueObjectEdgeCaseTest {
     @Test
     @DisplayName("EmploymentInfo: 종료일 지나면 비활성")
     void isActiveShouldBeFalseAfterEndDate() {
-        EmploymentInfo info = EmploymentInfo.of(LocalDate.now().minusDays(60), LocalDate.now().minusDays(1), 1L);
+        LocalDate baseDate = LocalDate.now();
+        EmploymentInfo info = EmploymentInfo.of(baseDate.minusDays(60), baseDate.minusDays(1), 1L);
 
         assertThat(info.isActive()).isFalse();
     }
