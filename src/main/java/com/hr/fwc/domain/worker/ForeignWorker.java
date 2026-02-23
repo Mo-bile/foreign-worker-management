@@ -1,34 +1,22 @@
 package com.hr.fwc.domain.worker;
 
-import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-@Entity
-@Table(name = "foreign_workers")
 public class ForeignWorker {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Embedded
     private PersonalInfo personalInfo;
 
-    @Embedded
     private VisaInfo visaInfo;
 
-    @Embedded
     private EmploymentInfo employmentInfo;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "nationality", nullable = false, length = 10)
     private Nationality nationality;
 
-    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
     protected ForeignWorker() {
@@ -45,8 +33,18 @@ public class ForeignWorker {
     }
 
     public static ForeignWorker create(PersonalInfo personalInfo, VisaInfo visaInfo,
-                                      EmploymentInfo employmentInfo, Nationality nationality) {
+                                       EmploymentInfo employmentInfo, Nationality nationality) {
         return new ForeignWorker(personalInfo, visaInfo, employmentInfo, nationality);
+    }
+
+    public static ForeignWorker reconstitute(Long id, PersonalInfo personalInfo, VisaInfo visaInfo,
+                                             EmploymentInfo employmentInfo, Nationality nationality,
+                                             LocalDateTime createdAt, LocalDateTime updatedAt) {
+        ForeignWorker w = new ForeignWorker(personalInfo, visaInfo, employmentInfo, nationality);
+        w.id = id;
+        w.createdAt = createdAt;
+        w.updatedAt = updatedAt;
+        return w;
     }
 
     public void updateVisaInfo(VisaInfo newVisaInfo) {
