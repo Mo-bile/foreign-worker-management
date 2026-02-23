@@ -1,30 +1,20 @@
 package com.hr.fwc.domain.workplace;
 
-import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-@Entity
-@Table(name = "workplaces")
 public class Workplace {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false, length = 100)
     private String name;
 
-    @Column(name = "business_number", nullable = false, length = 20)
     private String businessNumber;
 
-    @Column(name = "address", length = 200)
     private String address;
 
-    @Column(name = "contact_phone", length = 20)
     private String contactPhone;
 
-    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
     protected Workplace() {
@@ -40,6 +30,14 @@ public class Workplace {
 
     public static Workplace create(String name, String businessNumber, String address, String contactPhone) {
         return new Workplace(name, businessNumber, address, contactPhone);
+    }
+
+    public static Workplace reconstitute(Long id, String name, String businessNumber, String address,
+                                         String contactPhone, LocalDateTime createdAt) {
+        Workplace w = new Workplace(name, businessNumber, address, contactPhone);
+        w.id = id;
+        w.createdAt = createdAt;
+        return w;
     }
 
     public Long id() {
@@ -60,6 +58,10 @@ public class Workplace {
 
     public String contactPhone() {
         return contactPhone;
+    }
+
+    public LocalDateTime createdAt() {
+        return createdAt;
     }
 
 }
