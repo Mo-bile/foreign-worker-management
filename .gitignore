@@ -38,6 +38,15 @@ tmp/
 temp/
 *.tmp
 
+# Eclipse
 .classpath
 .project
-.settings
+.settings/
+
+# Environment
+.env
+.env.*
+
+# AI tooling
+.ai/
+.omc/
