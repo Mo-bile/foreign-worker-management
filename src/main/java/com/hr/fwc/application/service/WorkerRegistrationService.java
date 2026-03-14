@@ -31,6 +31,9 @@ public class WorkerRegistrationService {
     }
 
     public WorkerResponse registerWorker(RegisterWorkerRequest request) {
+        VisaType visaType = parseVisaType(request.visaType());
+        Nationality nationality = parseNationality(request.nationalityCode());
+
         PersonalInfo personalInfo = PersonalInfo.of(
             request.name(),
             request.passportNumber(),
@@ -39,7 +42,7 @@ public class WorkerRegistrationService {
         );
 
         VisaInfo visaInfo = VisaInfo.of(
-            VisaType.valueOf(request.visaType()),
+            visaType,
             request.visaExpiryDate(),
             request.entryDate(),
             request.registrationNumber()
@@ -51,8 +54,6 @@ public class WorkerRegistrationService {
             request.workplaceId()
         );
 
-        Nationality nationality = Nationality.valueOf(request.nationalityCode());
-
         ForeignWorker worker = ForeignWorker.create(personalInfo, visaInfo, employmentInfo, nationality);
         ForeignWorker savedWorker = workerRepository.save(worker);
 
@@ -61,6 +62,22 @@ public class WorkerRegistrationService {
         createComplianceDeadlines(savedWorker);
 
         return WorkerResponse.from(savedWorker, eligibilities);
+    }
+
+    private VisaType parseVisaType(String visaType) {
+        try {
+            return VisaType.valueOf(visaType);
+        } catch (IllegalArgumentException e) {
+            throw new InvalidVisaTypeException("유효하지 않은 비자 유형입니다: " + visaType);
+        }
+    }
+
+    private Nationality parseNationality(String nationalityCode) {
+        try {
+            return Nationality.valueOf(nationalityCode);
+        } catch (IllegalArgumentException e) {
+            throw new InvalidNationalityException("유효하지 않은 국적 코드입니다: " + nationalityCode);
+        }
     }
 
     private void createComplianceDeadlines(ForeignWorker worker) {

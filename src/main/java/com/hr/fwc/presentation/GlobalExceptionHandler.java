@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -14,6 +15,16 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
     private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponse> handleValidationException(MethodArgumentNotValidException ex) {
+        String message = ex.getBindingResult().getFieldErrors().stream()
+            .findFirst()
+            .map(error -> error.getField() + ": " + error.getDefaultMessage())
+            .orElse("입력값 검증에 실패했습니다");
+        log.warn("입력값 검증 실패: {}", message);
+        return buildResponse(HttpStatus.BAD_REQUEST, message);
+    }
 
     @ExceptionHandler(InvalidVisaTypeException.class)
     public ResponseEntity<ErrorResponse> handleInvalidVisaType(InvalidVisaTypeException ex) {

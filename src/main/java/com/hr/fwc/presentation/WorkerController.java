@@ -4,6 +4,7 @@ import com.hr.fwc.application.dto.RegisterWorkerRequest;
 import com.hr.fwc.application.dto.WorkerResponse;
 import com.hr.fwc.application.service.WorkerRegistrationService;
 import com.hr.fwc.presentation.api.WorkerApi;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ public class WorkerController implements WorkerApi {
     }
 
     @PostMapping
-    public ResponseEntity<WorkerResponse> registerWorker(@RequestBody RegisterWorkerRequest request) {
+    public ResponseEntity<WorkerResponse> registerWorker(@Valid @RequestBody RegisterWorkerRequest request) {
         WorkerResponse response = registrationService.registerWorker(request);
         return ResponseEntity.ok(response);
     }
