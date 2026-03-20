@@ -55,3 +55,6 @@ temp/
 # Seed data (local development only)
 src/main/resources/data.sql
 http/
+
+# Superpowers docs
+docs/superpowers/
