@@ -1,6 +1,5 @@
 package com.hr.fwc.application.service;
 
-import com.hr.fwc.application.dto.ComplianceDeadlineResponse;
 import com.hr.fwc.domain.compliance.ComplianceDeadline;
 import com.hr.fwc.domain.compliance.ComplianceDeadlineRepository;
 import com.hr.fwc.domain.compliance.DeadlineStatus;
@@ -39,7 +38,7 @@ class ComplianceDashboardServiceIntegrationTest {
     @Test
     @DisplayName("기한 초과 데드라인 조회")
     void getOverdueDeadlines() {
-        List<ComplianceDeadlineResponse> overdue = dashboardService.getOverdueDeadlines();
+        List<ComplianceDeadline> overdue = dashboardService.getOverdueDeadlines();
 
         assertThat(overdue).hasSize(1);
         assertThat(overdue.get(0).workerId()).isEqualTo(1L);
@@ -48,11 +47,11 @@ class ComplianceDashboardServiceIntegrationTest {
     @Test
     @DisplayName("임박한 데드라인 조회 (30일 이내)")
     void getUpcomingDeadlines() {
-        List<ComplianceDeadlineResponse> upcoming = dashboardService.getUpcomingDeadlines(30);
+        List<ComplianceDeadline> upcoming = dashboardService.getUpcomingDeadlines(30);
 
         assertThat(upcoming).hasSize(3);
         assertThat(upcoming)
-            .extracting(ComplianceDeadlineResponse::workerId)
+            .extracting(ComplianceDeadline::workerId)
             .containsExactlyInAnyOrder(1L, 2L, 3L);
     }
 
@@ -62,7 +61,7 @@ class ComplianceDashboardServiceIntegrationTest {
         createDeadline(10L, DeadlineType.VISA_EXPIRY, LocalDate.now().plusDays(10), DeadlineStatus.URGENT);
         createDeadline(10L, DeadlineType.INSURANCE_ENROLLMENT, LocalDate.now().plusDays(25), DeadlineStatus.APPROACHING);
 
-        List<ComplianceDeadlineResponse> workerDeadlines = dashboardService.getWorkerDeadlines(10L);
+        List<ComplianceDeadline> workerDeadlines = dashboardService.getWorkerDeadlines(10L);
 
         assertThat(workerDeadlines).hasSize(2);
     }
