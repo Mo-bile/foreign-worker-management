@@ -50,3 +50,4 @@ temp/
 # AI tooling
 .ai/
 .omc/
+.claude/
