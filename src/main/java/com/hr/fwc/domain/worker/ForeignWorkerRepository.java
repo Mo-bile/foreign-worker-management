@@ -10,5 +10,7 @@ public interface ForeignWorkerRepository {
 
     List<ForeignWorker> findByWorkplaceId(Long workplaceId);
 
+    List<ForeignWorker> findAll();
+
     List<ForeignWorker> findByNationality(Nationality nationality);
 }
