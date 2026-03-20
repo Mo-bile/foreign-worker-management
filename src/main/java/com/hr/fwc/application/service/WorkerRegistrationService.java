@@ -1,7 +1,7 @@
 package com.hr.fwc.application.service;
 
 import com.hr.fwc.application.dto.RegisterWorkerRequest;
-import com.hr.fwc.application.dto.WorkerResponse;
+import com.hr.fwc.application.dto.WorkerWithEligibilities;
 import com.hr.fwc.domain.compliance.ComplianceDeadline;
 import com.hr.fwc.domain.compliance.ComplianceDeadlineRepository;
 import com.hr.fwc.domain.compliance.DeadlineType;
@@ -30,7 +30,7 @@ public class WorkerRegistrationService {
         this.deadlineRepository = deadlineRepository;
     }
 
-    public WorkerResponse registerWorker(RegisterWorkerRequest request) {
+    public WorkerWithEligibilities registerWorker(RegisterWorkerRequest request) {
         PersonalInfo personalInfo = PersonalInfo.of(
             request.name(),
             request.passportNumber(),
@@ -60,7 +60,7 @@ public class WorkerRegistrationService {
 
         createComplianceDeadlines(savedWorker);
 
-        return WorkerResponse.from(savedWorker, eligibilities);
+        return new WorkerWithEligibilities(savedWorker, eligibilities);
     }
 
     private void createComplianceDeadlines(ForeignWorker worker) {

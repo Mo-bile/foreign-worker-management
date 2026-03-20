@@ -1,6 +1,6 @@
 package com.hr.fwc.presentation.api;
 
-import com.hr.fwc.domain.compliance.ComplianceDeadline;
+import com.hr.fwc.application.dto.ComplianceDeadlineResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -18,14 +18,14 @@ public interface ComplianceApi {
         @ApiResponse(responseCode = "200", description = "조회 성공"),
         @ApiResponse(responseCode = "500", description = "서버 오류")
     })
-    ResponseEntity<List<ComplianceDeadline>> getOverdueDeadlines();
+    ResponseEntity<List<ComplianceDeadlineResponse>> getOverdueDeadlines();
 
     @Operation(summary = "임박한 데드라인 조회")
     @ApiResponses({
         @ApiResponse(responseCode = "200", description = "조회 성공"),
         @ApiResponse(responseCode = "500", description = "서버 오류")
     })
-    ResponseEntity<List<ComplianceDeadline>> getUpcomingDeadlines(
+    ResponseEntity<List<ComplianceDeadlineResponse>> getUpcomingDeadlines(
         @Parameter(description = "조회할 일수", example = "30") int days
     );
 
@@ -35,7 +35,7 @@ public interface ComplianceApi {
         @ApiResponse(responseCode = "404", description = "근로자를 찾을 수 없음"),
         @ApiResponse(responseCode = "500", description = "서버 오류")
     })
-    ResponseEntity<List<ComplianceDeadline>> getWorkerDeadlines(
+    ResponseEntity<List<ComplianceDeadlineResponse>> getWorkerDeadlines(
         @Parameter(description = "근로자 ID", example = "1") Long workerId
     );
 

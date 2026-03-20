@@ -1,6 +1,7 @@
 package com.hr.fwc.presentation;
 
 import com.hr.fwc.application.dto.RegisterWorkerRequest;
+import com.hr.fwc.application.service.WorkerQueryService;
 import com.hr.fwc.application.service.WorkerRegistrationService;
 import com.hr.fwc.domain.worker.InvalidNationalityException;
 import com.hr.fwc.domain.worker.InvalidVisaTypeException;
@@ -33,6 +34,9 @@ class GlobalExceptionHandlerTest {
 
     @MockBean
     private WorkerRegistrationService registrationService;
+
+    @MockBean
+    private WorkerQueryService queryService;
 
     private RegisterWorkerRequest sampleRequest() {
         return new RegisterWorkerRequest(

@@ -24,6 +24,14 @@ public class ForeignWorkerRepositoryImpl implements ForeignWorkerRepository {
     }
 
     @Override
+    public List<ForeignWorker> findAll() {
+        return jpaRepository.findAll()
+            .stream()
+            .map(ForeignWorkerMapper::toDomain)
+            .toList();
+    }
+
+    @Override
     public Optional<ForeignWorker> findById(Long id) {
         return jpaRepository.findById(id).map(ForeignWorkerMapper::toDomain);
     }
