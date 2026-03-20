@@ -22,7 +22,12 @@ public class ApiLoggingInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
                                 Object handler, Exception ex) {
-        long startTime = (Long) request.getAttribute(START_TIME_ATTRIBUTE);
+        Object startTimeAttr = request.getAttribute(START_TIME_ATTRIBUTE);
+        if (startTimeAttr == null) {
+            return;
+        }
+
+        long startTime = (Long) startTimeAttr;
         long duration = System.currentTimeMillis() - startTime;
 
         String uri = buildUri(request);

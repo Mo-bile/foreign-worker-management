@@ -71,4 +71,17 @@ class ApiLoggingInterceptorTest {
         assertThat(output.getAll()).contains("/api/compliance/upcoming?days=30");
         assertThat(output.getAll()).contains("200");
     }
+
+    @Test
+    @DisplayName("startTime attribute가 없으면 로그를 출력하지 않는다")
+    void startTime_attribute가_없으면_로그를_출력하지_않는다(CapturedOutput output) throws Exception {
+        request.setMethod("GET");
+        request.setRequestURI("/api/workers");
+        response.setStatus(200);
+        // startTime attribute를 설정하지 않음
+
+        interceptor.afterCompletion(request, response, new Object(), null);
+
+        assertThat(output.getAll()).doesNotContain("[API]");
+    }
 }
