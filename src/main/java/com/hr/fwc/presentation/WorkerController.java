@@ -25,7 +25,7 @@ public class WorkerController implements WorkerApi {
 
     @PostMapping
     public ResponseEntity<WorkerResponse> registerWorker(@RequestBody RegisterWorkerRequest request) {
-        WorkerResponse response = registrationService.registerWorker(request);
+        WorkerResponse response = WorkerResponse.from(registrationService.registerWorker(request));
         return ResponseEntity.ok(response);
     }
 

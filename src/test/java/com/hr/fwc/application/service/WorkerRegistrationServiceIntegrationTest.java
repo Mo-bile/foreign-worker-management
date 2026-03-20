@@ -1,10 +1,11 @@
 package com.hr.fwc.application.service;
 
 import com.hr.fwc.application.dto.RegisterWorkerRequest;
-import com.hr.fwc.application.dto.WorkerResponse;
+import com.hr.fwc.application.dto.WorkerWithEligibilities;
 import com.hr.fwc.domain.compliance.ComplianceDeadline;
 import com.hr.fwc.domain.compliance.ComplianceDeadlineRepository;
 import com.hr.fwc.domain.compliance.DeadlineType;
+import com.hr.fwc.domain.insurance.InsuranceEligibility;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,19 +45,19 @@ class WorkerRegistrationServiceIntegrationTest {
             null
         );
 
-        WorkerResponse response = registrationService.registerWorker(request);
+        WorkerWithEligibilities result = registrationService.registerWorker(request);
 
-        assertThat(response.id()).isNotNull();
-        assertThat(response.name()).isEqualTo("Nguyen Van A");
-        assertThat(response.nationality()).isEqualTo("베트남");
-        assertThat(response.visaType()).isEqualTo("고용허가제 일반외국인");
+        assertThat(result.worker().id()).isNotNull();
+        assertThat(result.worker().personalInfo().name()).isEqualTo("Nguyen Van A");
+        assertThat(result.worker().nationality().koreanName()).isEqualTo("베트남");
+        assertThat(result.worker().visaInfo().visaType().description()).isEqualTo("고용허가제 일반외국인");
 
-        assertThat(response.insuranceEligibilities()).hasSize(4);
-        assertThat(response.insuranceEligibilities())
-            .extracting(WorkerResponse.InsuranceEligibilityDto::insuranceType)
+        assertThat(result.eligibilities()).hasSize(4);
+        assertThat(result.eligibilities())
+            .extracting(e -> e.insuranceType().koreanName())
             .containsExactlyInAnyOrder("국민연금", "건강보험", "고용보험", "산재보험");
 
-        List<ComplianceDeadline> deadlines = deadlineRepository.findByWorkerId(response.id());
+        List<ComplianceDeadline> deadlines = deadlineRepository.findByWorkerId(result.worker().id());
         assertThat(deadlines).hasSize(2);
         assertThat(deadlines)
             .extracting(ComplianceDeadline::deadlineType)
@@ -81,14 +82,14 @@ class WorkerRegistrationServiceIntegrationTest {
             "john@example.com"
         );
 
-        WorkerResponse response = registrationService.registerWorker(request);
+        WorkerWithEligibilities result = registrationService.registerWorker(request);
 
-        WorkerResponse.InsuranceEligibilityDto pension = response.insuranceEligibilities().stream()
-            .filter(e -> e.insuranceType().equals("국민연금"))
+        InsuranceEligibility pension = result.eligibilities().stream()
+            .filter(e -> e.insuranceType().koreanName().equals("국민연금"))
             .findFirst()
             .orElseThrow();
 
-        assertThat(pension.status()).isEqualTo("가입제외");
+        assertThat(pension.status().koreanName()).isEqualTo("가입제외");
         assertThat(pension.reason()).contains("사회보장협정");
     }
 
@@ -110,14 +111,14 @@ class WorkerRegistrationServiceIntegrationTest {
             null
         );
 
-        WorkerResponse response = registrationService.registerWorker(request);
+        WorkerWithEligibilities result = registrationService.registerWorker(request);
 
-        WorkerResponse.InsuranceEligibilityDto employment = response.insuranceEligibilities().stream()
-            .filter(e -> e.insuranceType().equals("고용보험"))
+        InsuranceEligibility employment = result.eligibilities().stream()
+            .filter(e -> e.insuranceType().koreanName().equals("고용보험"))
             .findFirst()
             .orElseThrow();
 
-        assertThat(employment.status()).isEqualTo("의무가입");
+        assertThat(employment.status().koreanName()).isEqualTo("의무가입");
     }
 
 }

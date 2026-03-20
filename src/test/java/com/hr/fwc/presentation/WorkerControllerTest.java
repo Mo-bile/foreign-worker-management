@@ -63,20 +63,22 @@ class WorkerControllerTest {
             null
         );
 
-        WorkerResponse response = new WorkerResponse(
+        ForeignWorker worker = ForeignWorker.reconstitute(
             1L,
-            "Nguyen Van A",
-            "베트남",
-            "고용허가제 일반외국인",
-            "2026-12-31",
-            "재직중",
-            List.of(
-                new WorkerResponse.InsuranceEligibilityDto("국민연금", "의무가입", "테스트"),
-                new WorkerResponse.InsuranceEligibilityDto("건강보험", "의무가입", "테스트")
-            )
+            PersonalInfo.of("Nguyen Van A", "V123456", "010-1234-5678", null),
+            VisaInfo.of(VisaType.E9, LocalDate.of(2026, 12, 31), LocalDate.of(2024, 1, 15), "12345678901"),
+            EmploymentInfo.of(LocalDate.of(2024, 2, 1), null, 1L),
+            Nationality.VIETNAM,
+            LocalDateTime.now(),
+            LocalDateTime.now()
         );
+        List<InsuranceEligibility> eligibilities = List.of(
+            InsuranceEligibility.of(InsuranceType.NATIONAL_PENSION, EligibilityStatus.MANDATORY, "의무가입 대상"),
+            InsuranceEligibility.of(InsuranceType.HEALTH_INSURANCE, EligibilityStatus.MANDATORY, "의무가입 대상")
+        );
+        WorkerWithEligibilities dto = new WorkerWithEligibilities(worker, eligibilities);
 
-        when(registrationService.registerWorker(any())).thenReturn(response);
+        when(registrationService.registerWorker(any())).thenReturn(dto);
 
         mockMvc.perform(post("/api/workers")
                 .contentType(MediaType.APPLICATION_JSON)
