@@ -51,3 +51,7 @@ temp/
 .ai/
 .omc/
 .claude/
+
+# Seed data (local development only)
+src/main/resources/data.sql
+http/
