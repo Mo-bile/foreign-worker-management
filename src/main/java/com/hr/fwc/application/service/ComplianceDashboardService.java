@@ -1,6 +1,6 @@
 package com.hr.fwc.application.service;
 
-import com.hr.fwc.domain.compliance.ComplianceDeadline;
+import com.hr.fwc.application.dto.ComplianceDeadlineResponse;
 import com.hr.fwc.domain.compliance.ComplianceDeadlineRepository;
 import com.hr.fwc.domain.compliance.DeadlineStatus;
 import org.springframework.stereotype.Service;
@@ -19,19 +19,21 @@ public class ComplianceDashboardService {
         this.deadlineRepository = deadlineRepository;
     }
 
-    public List<ComplianceDeadline> getOverdueDeadlines() {
-        return deadlineRepository.findByStatusIn(List.of(DeadlineStatus.OVERDUE));
+    public List<ComplianceDeadlineResponse> getOverdueDeadlines() {
+        return deadlineRepository.findByStatusIn(List.of(DeadlineStatus.OVERDUE))
+            .stream().map(ComplianceDeadlineResponse::from).toList();
     }
 
-    public List<ComplianceDeadline> getUpcomingDeadlines(int days) {
+    public List<ComplianceDeadlineResponse> getUpcomingDeadlines(int days) {
         return deadlineRepository.findByDueDateBeforeAndStatusNot(
             LocalDate.now().plusDays(days),
             DeadlineStatus.COMPLETED
-        );
+        ).stream().map(ComplianceDeadlineResponse::from).toList();
     }
 
-    public List<ComplianceDeadline> getWorkerDeadlines(Long workerId) {
-        return deadlineRepository.findByWorkerId(workerId);
+    public List<ComplianceDeadlineResponse> getWorkerDeadlines(Long workerId) {
+        return deadlineRepository.findByWorkerId(workerId)
+            .stream().map(ComplianceDeadlineResponse::from).toList();
     }
 
 }
