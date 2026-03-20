@@ -1,6 +1,6 @@
 package com.hr.fwc.application.service;
 
-import com.hr.fwc.application.dto.WorkerResponse;
+import com.hr.fwc.application.dto.WorkerWithEligibilities;
 import com.hr.fwc.domain.insurance.InsuranceEligibility;
 import com.hr.fwc.domain.insurance.InsuranceEligibilityService;
 import com.hr.fwc.domain.worker.ForeignWorker;
@@ -24,20 +24,20 @@ public class WorkerQueryService {
         this.insuranceService = insuranceService;
     }
 
-    public List<WorkerResponse> getAllWorkers() {
+    public List<WorkerWithEligibilities> getAllWorkers() {
         return workerRepository.findAll().stream()
-            .map(this::toWorkerResponse)
+            .map(this::toWorkerWithEligibilities)
             .toList();
     }
 
-    public WorkerResponse getWorkerById(Long id) {
+    public WorkerWithEligibilities getWorkerById(Long id) {
         ForeignWorker worker = workerRepository.findById(id)
             .orElseThrow(() -> new WorkerNotFoundException("근로자를 찾을 수 없습니다. ID: " + id));
-        return toWorkerResponse(worker);
+        return toWorkerWithEligibilities(worker);
     }
 
-    private WorkerResponse toWorkerResponse(ForeignWorker worker) {
+    private WorkerWithEligibilities toWorkerWithEligibilities(ForeignWorker worker) {
         List<InsuranceEligibility> eligibilities = insuranceService.determineAllEligibilities(worker);
-        return WorkerResponse.from(worker, eligibilities);
+        return new WorkerWithEligibilities(worker, eligibilities);
     }
 }

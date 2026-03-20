@@ -1,6 +1,6 @@
 package com.hr.fwc.application.service;
 
-import com.hr.fwc.application.dto.WorkerResponse;
+import com.hr.fwc.application.dto.WorkerWithEligibilities;
 import com.hr.fwc.domain.insurance.InsuranceEligibility;
 import com.hr.fwc.domain.insurance.InsuranceEligibilityService;
 import com.hr.fwc.domain.insurance.InsuranceType;
@@ -68,12 +68,12 @@ class WorkerQueryServiceTest {
             when(workerRepository.findAll()).thenReturn(List.of(sampleWorker));
             when(insuranceService.determineAllEligibilities(any())).thenReturn(sampleEligibilities);
 
-            List<WorkerResponse> result = workerQueryService.getAllWorkers();
+            List<WorkerWithEligibilities> result = workerQueryService.getAllWorkers();
 
             assertThat(result).hasSize(1);
-            assertThat(result.get(0).id()).isEqualTo(1L);
-            assertThat(result.get(0).name()).isEqualTo("Nguyen Van A");
-            assertThat(result.get(0).insuranceEligibilities()).hasSize(2);
+            assertThat(result.get(0).worker().id()).isEqualTo(1L);
+            assertThat(result.get(0).worker().personalInfo().name()).isEqualTo("Nguyen Van A");
+            assertThat(result.get(0).eligibilities()).hasSize(2);
         }
 
         @Test
@@ -81,7 +81,7 @@ class WorkerQueryServiceTest {
         void 등록된_근로자가_없으면_빈_목록을_반환한다() {
             when(workerRepository.findAll()).thenReturn(List.of());
 
-            List<WorkerResponse> result = workerQueryService.getAllWorkers();
+            List<WorkerWithEligibilities> result = workerQueryService.getAllWorkers();
 
             assertThat(result).isEmpty();
         }
@@ -97,12 +97,12 @@ class WorkerQueryServiceTest {
             when(workerRepository.findById(1L)).thenReturn(Optional.of(sampleWorker));
             when(insuranceService.determineAllEligibilities(sampleWorker)).thenReturn(sampleEligibilities);
 
-            WorkerResponse result = workerQueryService.getWorkerById(1L);
+            WorkerWithEligibilities result = workerQueryService.getWorkerById(1L);
 
-            assertThat(result.id()).isEqualTo(1L);
-            assertThat(result.name()).isEqualTo("Nguyen Van A");
-            assertThat(result.nationality()).isNotNull();
-            assertThat(result.insuranceEligibilities()).hasSize(2);
+            assertThat(result.worker().id()).isEqualTo(1L);
+            assertThat(result.worker().personalInfo().name()).isEqualTo("Nguyen Van A");
+            assertThat(result.worker().nationality()).isNotNull();
+            assertThat(result.eligibilities()).hasSize(2);
         }
 
         @Test

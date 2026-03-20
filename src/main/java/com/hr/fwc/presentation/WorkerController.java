@@ -31,13 +31,15 @@ public class WorkerController implements WorkerApi {
 
     @GetMapping
     public ResponseEntity<List<WorkerResponse>> getAllWorkers() {
-        List<WorkerResponse> workers = queryService.getAllWorkers();
+        List<WorkerResponse> workers = queryService.getAllWorkers().stream()
+            .map(WorkerResponse::from)
+            .toList();
         return ResponseEntity.ok(workers);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<WorkerResponse> getWorkerById(@PathVariable Long id) {
-        WorkerResponse worker = queryService.getWorkerById(id);
+        WorkerResponse worker = WorkerResponse.from(queryService.getWorkerById(id));
         return ResponseEntity.ok(worker);
     }
 
