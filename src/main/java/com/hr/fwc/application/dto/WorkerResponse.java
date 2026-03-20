@@ -43,4 +43,8 @@ public record WorkerResponse(
         );
     }
 
+    public static WorkerResponse from(WorkerWithEligibilities dto) {
+        return from(dto.worker(), dto.eligibilities());
+    }
+
 }
