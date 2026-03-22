@@ -1,5 +1,7 @@
 package com.hr.fwc.presentation;
 
+import com.hr.fwc.domain.company.CompanyNotFoundException;
+import com.hr.fwc.domain.company.DuplicateBusinessNumberException;
 import com.hr.fwc.domain.worker.InvalidNationalityException;
 import com.hr.fwc.domain.worker.InvalidVisaTypeException;
 import com.hr.fwc.domain.worker.WorkerNotFoundException;
@@ -31,6 +33,24 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleWorkerNotFound(WorkerNotFoundException ex) {
         log.warn("근로자 조회 실패: {}", ex.getMessage());
         return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage());
+    }
+
+    @ExceptionHandler(CompanyNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleCompanyNotFound(CompanyNotFoundException ex) {
+        log.warn("사업장 조회 실패: {}", ex.getMessage());
+        return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage());
+    }
+
+    @ExceptionHandler(DuplicateBusinessNumberException.class)
+    public ResponseEntity<ErrorResponse> handleDuplicateBusinessNumber(DuplicateBusinessNumberException ex) {
+        log.warn("중복 사업자등록번호: {}", ex.getMessage());
+        return buildResponse(HttpStatus.CONFLICT, ex.getMessage());
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorResponse> handleIllegalArgument(IllegalArgumentException ex) {
+        log.warn("잘못된 요청: {}", ex.getMessage());
+        return buildResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
     }
 
     @ExceptionHandler(RuntimeException.class)
