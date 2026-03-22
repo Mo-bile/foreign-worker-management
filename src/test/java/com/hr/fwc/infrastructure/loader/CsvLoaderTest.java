@@ -17,8 +17,8 @@ class CsvLoaderTest {
     void 유효한_CSV_파싱() {
         List<RegionalIndustryCsvRow> rows = csvLoader.load("data/regional_industry.csv", RegionalIndustryCsvRow.class);
         assertThat(rows).hasSize(5);
-        assertThat(rows.get(0).region).isEqualTo("서울특별시");
-        assertThat(rows.get(0).workerCount).isEqualTo(12500);
+        assertThat(rows.get(0).getRegion()).isEqualTo("서울특별시");
+        assertThat(rows.get(0).getWorkerCount()).isEqualTo(12500);
     }
 
     @Test

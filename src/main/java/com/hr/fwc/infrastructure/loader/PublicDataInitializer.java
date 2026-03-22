@@ -59,8 +59,8 @@ public class PublicDataInitializer implements ApplicationRunner {
     private void loadRegionalIndustry(String snapshotId) {
         List<RegionalIndustryCsvRow> rows = csvLoader.load("data/regional_industry.csv", RegionalIndustryCsvRow.class);
         List<RegionalIndustry> domains = rows.stream()
-            .map(r -> RegionalIndustry.create(snapshotId, r.region, r.industry,
-                r.quarter, r.workerCount, LocalDate.parse(r.referenceDate)))
+            .map(r -> RegionalIndustry.create(snapshotId, r.getRegion(), r.getIndustry(),
+                r.getQuarter(), r.getWorkerCount(), LocalDate.parse(r.getReferenceDate())))
             .toList();
         regionalIndustryRepository.saveAll(domains);
         log.info("  지역×업종 현황: {}건 적재", domains.size());
@@ -69,8 +69,8 @@ public class PublicDataInitializer implements ApplicationRunner {
     private void loadManufacturing(String snapshotId) {
         List<ManufacturingCsvRow> rows = csvLoader.load("data/manufacturing.csv", ManufacturingCsvRow.class);
         List<Manufacturing> domains = rows.stream()
-            .map(r -> Manufacturing.create(snapshotId, r.subIndustry,
-                r.workerCount, r.year, LocalDate.parse(r.referenceDate)))
+            .map(r -> Manufacturing.create(snapshotId, r.getSubIndustry(),
+                r.getWorkerCount(), r.getYear(), LocalDate.parse(r.getReferenceDate())))
             .toList();
         manufacturingRepository.saveAll(domains);
         log.info("  제조업 중분류: {}건 적재", domains.size());
@@ -79,8 +79,8 @@ public class PublicDataInitializer implements ApplicationRunner {
     private void loadVietnamE9(String snapshotId) {
         List<VietnamE9CsvRow> rows = csvLoader.load("data/vietnam_e9.csv", VietnamE9CsvRow.class);
         List<VietnamE9> domains = rows.stream()
-            .map(r -> VietnamE9.create(snapshotId, r.industry,
-                r.totalCount, r.maleCount, r.femaleCount, LocalDate.parse(r.referenceDate)))
+            .map(r -> VietnamE9.create(snapshotId, r.getIndustry(),
+                r.getTotalCount(), r.getMaleCount(), r.getFemaleCount(), LocalDate.parse(r.getReferenceDate())))
             .toList();
         vietnamE9Repository.saveAll(domains);
         log.info("  베트남 E-9: {}건 적재", domains.size());

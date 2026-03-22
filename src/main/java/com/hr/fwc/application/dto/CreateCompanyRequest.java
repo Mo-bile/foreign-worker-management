@@ -42,4 +42,10 @@ public record CreateCompanyRequest(
     @NotBlank
     @Schema(description = "연락처", example = "031-123-4567", requiredMode = Schema.RequiredMode.REQUIRED)
     String contactPhone
-) {}
+) {
+    @AssertTrue(message = "외국인 근로자 수는 상시 근로자 수를 초과할 수 없습니다")
+    @Schema(hidden = true)
+    boolean isValidWorkerCount() {
+        return foreignWorkerCount <= employeeCount;
+    }
+}
