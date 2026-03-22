@@ -33,7 +33,7 @@ class PersistenceSchemaSmokeTest {
             "REGISTRATION_NUMBER",
             "CONTRACT_START_DATE",
             "CONTRACT_END_DATE",
-            "WORKPLACE_ID",
+            "COMPANY_ID",
             "NATIONALITY",
             "CREATED_AT",
             "UPDATED_AT"
@@ -55,16 +55,23 @@ class PersistenceSchemaSmokeTest {
     }
 
     @Test
-    void workplaceTableShouldContainBusinessColumns() {
-        List<String> columns = columnsOf("WORKPLACES");
+    void companyTableShouldContainBusinessColumns() {
+        List<String> columns = columnsOf("COMPANIES");
 
         assertThat(columns).contains(
             "ID",
             "NAME",
             "BUSINESS_NUMBER",
+            "REGION",
+            "SUB_REGION",
+            "INDUSTRY_CATEGORY",
+            "INDUSTRY_SUB_CATEGORY",
+            "EMPLOYEE_COUNT",
+            "FOREIGN_WORKER_COUNT",
             "ADDRESS",
             "CONTACT_PHONE",
-            "CREATED_AT"
+            "CREATED_AT",
+            "UPDATED_AT"
         );
     }
 
