@@ -13,14 +13,14 @@ public record CreateCompanyRequest(
     @Schema(description = "사업자등록번호", example = "123-45-67890", requiredMode = Schema.RequiredMode.REQUIRED)
     String businessNumber,
 
-    @NotNull
+    @NotBlank
     @Schema(description = "시도", example = "GYEONGGI", requiredMode = Schema.RequiredMode.REQUIRED)
     String region,
 
     @Schema(description = "시군구", example = "안산시")
     String subRegion,
 
-    @NotNull
+    @NotBlank
     @Schema(description = "업종 대분류", example = "MANUFACTURING", requiredMode = Schema.RequiredMode.REQUIRED)
     String industryCategory,
 

@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -22,28 +22,38 @@ public class PublicDataInitializer implements ApplicationRunner {
     private final RegionalIndustryRepository regionalIndustryRepository;
     private final ManufacturingRepository manufacturingRepository;
     private final VietnamE9Repository vietnamE9Repository;
+    private final TransactionTemplate transactionTemplate;
 
     public PublicDataInitializer(CsvLoader csvLoader,
                                   RegionalIndustryRepository regionalIndustryRepository,
                                   ManufacturingRepository manufacturingRepository,
-                                  VietnamE9Repository vietnamE9Repository) {
+                                  VietnamE9Repository vietnamE9Repository,
+                                  TransactionTemplate transactionTemplate) {
         this.csvLoader = csvLoader;
         this.regionalIndustryRepository = regionalIndustryRepository;
         this.manufacturingRepository = manufacturingRepository;
         this.vietnamE9Repository = vietnamE9Repository;
+        this.transactionTemplate = transactionTemplate;
     }
 
     @Override
-    @Transactional
     public void run(ApplicationArguments args) {
         String snapshotId = UUID.randomUUID().toString();
         log.info("공공데이터 적재 시작 (snapshotId={})", snapshotId);
 
         long start = System.currentTimeMillis();
-        loadRegionalIndustry(snapshotId);
-        loadManufacturing(snapshotId);
-        loadVietnamE9(snapshotId);
+        executeInTransaction("지역×업종 현황", () -> loadRegionalIndustry(snapshotId));
+        executeInTransaction("제조업 중분류", () -> loadManufacturing(snapshotId));
+        executeInTransaction("베트남 E-9", () -> loadVietnamE9(snapshotId));
         log.info("공공데이터 적재 완료 ({}ms)", System.currentTimeMillis() - start);
+    }
+
+    private void executeInTransaction(String label, Runnable loader) {
+        try {
+            transactionTemplate.executeWithoutResult(status -> loader.run());
+        } catch (Exception e) {
+            log.error("  {} 적재 실패 — 나머지 계속 진행: {}", label, e.getMessage());
+        }
     }
 
     private void loadRegionalIndustry(String snapshotId) {

@@ -9,14 +9,14 @@ public record UpdateCompanyRequest(
     @Schema(description = "사업장명", example = "한국제조(주)")
     String name,
 
-    @NotNull
+    @NotBlank
     @Schema(description = "시도", example = "GYEONGGI")
     String region,
 
     @Schema(description = "시군구", example = "안산시")
     String subRegion,
 
-    @NotNull
+    @NotBlank
     @Schema(description = "업종 대분류", example = "MANUFACTURING")
     String industryCategory,
 
