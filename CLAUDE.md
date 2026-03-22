@@ -45,12 +45,16 @@ com.hr.fwc
 │   ├── worker/       # ForeignWorker 애그리거트 (PersonalInfo, VisaInfo, EmploymentInfo VO)
 │   ├── insurance/    # 4대보험 정책 (Strategy 패턴)
 │   ├── compliance/   # ComplianceDeadline (상태 자동 계산)
-│   └── workplace/    # Workplace 엔티티
+│   ├── company/      # Company 애그리거트 (Region, IndustryCategory enum)
+│   └── publicdata/   # 공공데이터 도메인 (RegionalIndustry, Manufacturing, VietnamE9, Quota)
 ├── application/      # 서비스, DTO
-│   ├── service/      # WorkerRegistrationService, ComplianceDashboardService
-│   └── dto/          # RegisterWorkerRequest, WorkerResponse
+│   ├── service/      # WorkerRegistrationService, CompanyService, ComplianceDashboardService
+│   └── dto/          # RegisterWorkerRequest, CompanyResponse, WorkerResponse
+├── infrastructure/   # JPA 엔티티, 매퍼, 리포지토리 구현체, CSV 로더
+│   ├── persistence/  # entity/, mapper/, repository/
+│   └── loader/       # CsvLoader, PublicDataInitializer, csv/
 └── presentation/     # REST 컨트롤러
-    └── api/          # WorkerController, ComplianceController
+    └── api/          # WorkerApi, CompanyApi, ComplianceController
 ```
 
 ### 핵심 도메인 개념
