@@ -1,5 +1,9 @@
 package com.hr.fwc.infrastructure.persistence.repository;
 
+import com.hr.fwc.domain.company.Company;
+import com.hr.fwc.domain.company.CompanyRepository;
+import com.hr.fwc.domain.company.IndustryCategory;
+import com.hr.fwc.domain.company.Region;
 import com.hr.fwc.domain.compliance.ComplianceDeadline;
 import com.hr.fwc.domain.compliance.ComplianceDeadlineRepository;
 import com.hr.fwc.domain.compliance.DeadlineStatus;
@@ -11,8 +15,6 @@ import com.hr.fwc.domain.worker.Nationality;
 import com.hr.fwc.domain.worker.PersonalInfo;
 import com.hr.fwc.domain.worker.VisaInfo;
 import com.hr.fwc.domain.worker.VisaType;
-import com.hr.fwc.domain.workplace.Workplace;
-import com.hr.fwc.domain.workplace.WorkplaceRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,7 +30,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class RepositoryAdapterIntegrationTest {
 
     @Autowired
-    private WorkplaceRepository workplaceRepository;
+    private CompanyRepository companyRepository;
 
     @Autowired
     private ForeignWorkerRepository workerRepository;
@@ -37,50 +39,56 @@ class RepositoryAdapterIntegrationTest {
     private ComplianceDeadlineRepository deadlineRepository;
 
     @Test
-    void workplaceRepositoryShouldSaveAndFindByBusinessNumber() {
-        Workplace workplace = Workplace.create("Test Company", "111-22-33333", "Seoul", "02-0000-0000");
+    void companyRepositoryShouldSaveAndFindByBusinessNumber() {
+        Company company = Company.create("Test Company", "111-22-33333",
+            Region.SEOUL, null, IndustryCategory.MANUFACTURING, null,
+            10, 0, "Seoul", "02-0000-0000");
 
-        Workplace saved = workplaceRepository.save(workplace);
+        Company saved = companyRepository.save(company);
 
         assertThat(saved.id()).isNotNull();
-        assertThat(workplaceRepository.findById(saved.id())).isPresent();
-        assertThat(workplaceRepository.findByBusinessNumber("111-22-33333"))
+        assertThat(companyRepository.findById(saved.id())).isPresent();
+        assertThat(companyRepository.findByBusinessNumber("111-22-33333"))
             .isPresent()
             .get()
-            .extracting(Workplace::name)
+            .extracting(Company::name)
             .isEqualTo("Test Company");
     }
 
     @Test
-    void foreignWorkerRepositoryShouldSupportWorkplaceAndNationalityQueries() {
-        Workplace workplace = workplaceRepository.save(
-            Workplace.create("Factory A", "222-33-44444", "Busan", "051-123-4567")
+    void foreignWorkerRepositoryShouldSupportCompanyAndNationalityQueries() {
+        Company company = companyRepository.save(
+            Company.create("Factory A", "222-33-44444",
+                Region.BUSAN, null, IndustryCategory.MANUFACTURING, null,
+                50, 10, "Busan", "051-123-4567")
         );
 
         ForeignWorker worker = ForeignWorker.create(
             PersonalInfo.of("Nguyen", "P-777", "010-7777-7777", null),
             VisaInfo.of(VisaType.E9, LocalDate.of(2027, 5, 31), LocalDate.of(2024, 3, 1), "12345678901"),
-            EmploymentInfo.of(LocalDate.of(2024, 3, 1), null, workplace.id()),
+            EmploymentInfo.of(LocalDate.of(2024, 3, 1), null, company.id()),
             Nationality.VIETNAM
         );
 
         ForeignWorker saved = workerRepository.save(worker);
 
         assertThat(workerRepository.findById(saved.id())).isPresent();
-        assertThat(workerRepository.findByWorkplaceId(workplace.id())).hasSize(1);
+        assertThat(workerRepository.findByCompanyId(company.id())).hasSize(1);
         assertThat(workerRepository.findByNationality(Nationality.VIETNAM)).hasSize(1);
     }
 
     @Test
     void complianceDeadlineRepositoryShouldSupportStatusAndDateQueries() {
-        Workplace workplace = workplaceRepository.save(
-            Workplace.create("Factory B", "333-44-55555", "Incheon", "032-111-2222")
+        Company company = companyRepository.save(
+            Company.create("Factory B", "333-44-55555",
+                Region.INCHEON, null, IndustryCategory.CONSTRUCTION, null,
+                30, 5, "Incheon", "032-111-2222")
         );
         ForeignWorker worker = workerRepository.save(
             ForeignWorker.create(
                 PersonalInfo.of("John", "P-999", "010-9999-9999", null),
                 VisaInfo.of(VisaType.E7, LocalDate.of(2028, 1, 1), LocalDate.of(2024, 1, 1), "10987654321"),
-                EmploymentInfo.of(LocalDate.of(2024, 1, 1), null, workplace.id()),
+                EmploymentInfo.of(LocalDate.of(2024, 1, 1), null, company.id()),
                 Nationality.USA
             )
         );

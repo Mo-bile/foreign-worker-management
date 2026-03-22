@@ -1,5 +1,8 @@
 package com.hr.fwc.infrastructure.persistence.mapper;
 
+import com.hr.fwc.domain.company.Company;
+import com.hr.fwc.domain.company.IndustryCategory;
+import com.hr.fwc.domain.company.Region;
 import com.hr.fwc.domain.compliance.ComplianceDeadline;
 import com.hr.fwc.domain.compliance.DeadlineStatus;
 import com.hr.fwc.domain.compliance.DeadlineType;
@@ -9,7 +12,6 @@ import com.hr.fwc.domain.worker.Nationality;
 import com.hr.fwc.domain.worker.PersonalInfo;
 import com.hr.fwc.domain.worker.VisaInfo;
 import com.hr.fwc.domain.worker.VisaType;
-import com.hr.fwc.domain.workplace.Workplace;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -37,7 +39,7 @@ class PersistenceMapperTest {
         assertThat(mapped.personalInfo().name()).isEqualTo(source.personalInfo().name());
         assertThat(mapped.personalInfo().passportNumber()).isEqualTo(source.personalInfo().passportNumber());
         assertThat(mapped.visaInfo().visaType()).isEqualTo(source.visaInfo().visaType());
-        assertThat(mapped.employmentInfo().workplaceId()).isEqualTo(source.employmentInfo().workplaceId());
+        assertThat(mapped.employmentInfo().companyId()).isEqualTo(source.employmentInfo().companyId());
         assertThat(mapped.nationality()).isEqualTo(source.nationality());
         assertThat(mapped.createdAt()).isEqualTo(source.createdAt());
         assertThat(mapped.updatedAt()).isEqualTo(source.updatedAt());
@@ -65,21 +67,25 @@ class PersistenceMapperTest {
     }
 
     @Test
-    void workplaceMapperShouldPreserveFields() {
-        Workplace source = Workplace.reconstitute(
-            25L,
-            "Sample Factory",
-            "123-45-67890",
-            "Seoul",
-            "02-1234-5678",
-            LocalDateTime.of(2024, 1, 10, 8, 30)
+    void companyMapperShouldPreserveFields() {
+        LocalDateTime createdAt = LocalDateTime.of(2024, 1, 10, 8, 30);
+        Company source = Company.reconstitute(
+            25L, "Sample Factory", "123-45-67890",
+            Region.GYEONGGI, null,
+            IndustryCategory.MANUFACTURING, null,
+            100, 20, "Seoul", "02-1234-5678",
+            createdAt, null
         );
 
-        Workplace mapped = WorkplaceMapper.toDomain(WorkplaceMapper.toEntity(source));
+        Company mapped = CompanyMapper.toDomain(CompanyMapper.toEntity(source));
 
         assertThat(mapped.id()).isEqualTo(source.id());
         assertThat(mapped.name()).isEqualTo(source.name());
         assertThat(mapped.businessNumber()).isEqualTo(source.businessNumber());
+        assertThat(mapped.region()).isEqualTo(source.region());
+        assertThat(mapped.industryCategory()).isEqualTo(source.industryCategory());
+        assertThat(mapped.employeeCount()).isEqualTo(source.employeeCount());
+        assertThat(mapped.foreignWorkerCount()).isEqualTo(source.foreignWorkerCount());
         assertThat(mapped.address()).isEqualTo(source.address());
         assertThat(mapped.contactPhone()).isEqualTo(source.contactPhone());
         assertThat(mapped.createdAt()).isEqualTo(source.createdAt());
