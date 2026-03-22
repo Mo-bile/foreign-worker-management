@@ -1,5 +1,7 @@
 package com.hr.fwc.application.dto;
 
+import com.hr.fwc.domain.company.IndustryCategory;
+import com.hr.fwc.domain.company.Region;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 
@@ -13,16 +15,16 @@ public record CreateCompanyRequest(
     @Schema(description = "사업자등록번호", example = "123-45-67890", requiredMode = Schema.RequiredMode.REQUIRED)
     String businessNumber,
 
-    @NotBlank
+    @NotNull
     @Schema(description = "시도", example = "GYEONGGI", requiredMode = Schema.RequiredMode.REQUIRED)
-    String region,
+    Region region,
 
     @Schema(description = "시군구", example = "안산시")
     String subRegion,
 
-    @NotBlank
+    @NotNull
     @Schema(description = "업종 대분류", example = "MANUFACTURING", requiredMode = Schema.RequiredMode.REQUIRED)
-    String industryCategory,
+    IndustryCategory industryCategory,
 
     @Schema(description = "업종 중분류", example = "금속가공제품제조업")
     String industrySubCategory,
@@ -32,7 +34,7 @@ public record CreateCompanyRequest(
     int employeeCount,
 
     @Min(0)
-    @Schema(description = "외국인 근로자 수", example = "20", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "외국인 근로자 수 (상시 근로자 수 이하)", example = "20", requiredMode = Schema.RequiredMode.REQUIRED)
     int foreignWorkerCount,
 
     @NotBlank

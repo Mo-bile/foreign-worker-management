@@ -19,6 +19,12 @@ public class VietnamE9 {
                        int maleCount, int femaleCount, LocalDate referenceDate) {
         this.snapshotId = Objects.requireNonNull(snapshotId);
         this.industry = Objects.requireNonNull(industry);
+        if (totalCount < 0 || maleCount < 0 || femaleCount < 0) {
+            throw new IllegalArgumentException("Count fields cannot be negative");
+        }
+        if (totalCount != maleCount + femaleCount) {
+            throw new IllegalArgumentException("totalCount must equal maleCount + femaleCount");
+        }
         this.totalCount = totalCount;
         this.maleCount = maleCount;
         this.femaleCount = femaleCount;

@@ -3,8 +3,7 @@ package com.hr.fwc.application.service;
 import com.hr.fwc.application.dto.CompanyResponse;
 import com.hr.fwc.application.dto.CreateCompanyRequest;
 import com.hr.fwc.application.dto.UpdateCompanyRequest;
-import com.hr.fwc.domain.company.CompanyNotFoundException;
-import com.hr.fwc.domain.company.DuplicateBusinessNumberException;
+import com.hr.fwc.domain.company.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +26,8 @@ class CompanyServiceIntegrationTest {
     @DisplayName("사업장을 등록하고 조회할 수 있다")
     void 사업장_등록_및_조회() {
         CreateCompanyRequest request = new CreateCompanyRequest(
-            "테스트 제조", "999-99-99999", "GYEONGGI", "안산시",
-            "MANUFACTURING", "금속가공", 100, 20, "경기도 안산시", "031-000-0000"
+            "테스트 제조", "999-99-99999", Region.GYEONGGI, "안산시",
+            IndustryCategory.MANUFACTURING, "금속가공", 100, 20, "경기도 안산시", "031-000-0000"
         );
 
         CompanyResponse created = companyService.createCompany(request);
@@ -53,14 +52,14 @@ class CompanyServiceIntegrationTest {
     @DisplayName("사업장 정보를 수정할 수 있다")
     void 사업장_정보_수정() {
         CreateCompanyRequest request = new CreateCompanyRequest(
-            "원래이름", "888-88-88888", "SEOUL", null,
-            "SERVICE", null, 50, 5, "서울", "02-000-0000"
+            "원래이름", "888-88-88888", Region.SEOUL, null,
+            IndustryCategory.SERVICE, null, 50, 5, "서울", "02-000-0000"
         );
         CompanyResponse created = companyService.createCompany(request);
 
         UpdateCompanyRequest update = new UpdateCompanyRequest(
-            "변경이름", "BUSAN", "해운대구",
-            "ACCOMMODATION", null, 80, 15, "부산", "051-000-0000"
+            "변경이름", Region.BUSAN, "해운대구",
+            IndustryCategory.ACCOMMODATION, null, 80, 15, "부산", "051-000-0000"
         );
         CompanyResponse updated = companyService.updateCompany(created.id(), update);
 
@@ -80,14 +79,14 @@ class CompanyServiceIntegrationTest {
     @DisplayName("중복 사업자등록번호 등록 시 예외 발생")
     void 중복_사업자등록번호() {
         CreateCompanyRequest request = new CreateCompanyRequest(
-            "첫번째", "777-77-77777", "SEOUL", null,
-            "SERVICE", null, 10, 0, "서울", "02-000"
+            "첫번째", "777-77-77777", Region.SEOUL, null,
+            IndustryCategory.SERVICE, null, 10, 0, "서울", "02-000"
         );
         companyService.createCompany(request);
 
         CreateCompanyRequest duplicate = new CreateCompanyRequest(
-            "두번째", "777-77-77777", "BUSAN", null,
-            "CONSTRUCTION", null, 20, 0, "부산", "051-000"
+            "두번째", "777-77-77777", Region.BUSAN, null,
+            IndustryCategory.CONSTRUCTION, null, 20, 0, "부산", "051-000"
         );
         assertThatThrownBy(() -> companyService.createCompany(duplicate))
             .isInstanceOf(DuplicateBusinessNumberException.class);

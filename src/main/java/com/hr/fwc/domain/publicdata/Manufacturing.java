@@ -18,6 +18,12 @@ public class Manufacturing {
                            int year, LocalDate referenceDate) {
         this.snapshotId = Objects.requireNonNull(snapshotId);
         this.subIndustry = Objects.requireNonNull(subIndustry);
+        if (workerCount < 0) {
+            throw new IllegalArgumentException("workerCount cannot be negative");
+        }
+        if (year < 1) {
+            throw new IllegalArgumentException("year must be positive");
+        }
         this.workerCount = workerCount;
         this.year = year;
         this.referenceDate = Objects.requireNonNull(referenceDate);

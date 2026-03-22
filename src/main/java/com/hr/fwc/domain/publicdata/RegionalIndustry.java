@@ -21,6 +21,9 @@ public class RegionalIndustry {
         this.region = Objects.requireNonNull(region);
         this.industry = Objects.requireNonNull(industry);
         this.quarter = Objects.requireNonNull(quarter);
+        if (workerCount < 0) {
+            throw new IllegalArgumentException("workerCount cannot be negative");
+        }
         this.workerCount = workerCount;
         this.referenceDate = Objects.requireNonNull(referenceDate);
     }

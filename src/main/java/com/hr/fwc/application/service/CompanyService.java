@@ -13,22 +13,6 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class CompanyService {
 
-    private static Region parseRegion(String value) {
-        try {
-            return Region.valueOf(value);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("올바르지 않은 시도 코드입니다: " + value);
-        }
-    }
-
-    private static IndustryCategory parseIndustryCategory(String value) {
-        try {
-            return IndustryCategory.valueOf(value);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("올바르지 않은 업종 대분류 코드입니다: " + value);
-        }
-    }
-
     private final CompanyRepository companyRepository;
 
     public CompanyService(CompanyRepository companyRepository) {
@@ -45,9 +29,9 @@ public class CompanyService {
         Company company = Company.create(
             request.name(),
             request.businessNumber(),
-            parseRegion(request.region()),
+            request.region(),
             request.subRegion(),
-            parseIndustryCategory(request.industryCategory()),
+            request.industryCategory(),
             request.industrySubCategory(),
             request.employeeCount(),
             request.foreignWorkerCount(),
@@ -77,9 +61,9 @@ public class CompanyService {
 
         Company updated = existing.updateInfo(
             request.name(),
-            parseRegion(request.region()),
+            request.region(),
             request.subRegion(),
-            parseIndustryCategory(request.industryCategory()),
+            request.industryCategory(),
             request.industrySubCategory(),
             request.employeeCount(),
             request.foreignWorkerCount(),

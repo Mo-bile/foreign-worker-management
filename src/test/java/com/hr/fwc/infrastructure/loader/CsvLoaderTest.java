@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class CsvLoaderTest {
 
@@ -22,9 +23,10 @@ class CsvLoaderTest {
     }
 
     @Test
-    @DisplayName("존재하지 않는 CSV 파일은 빈 리스트를 반환한다")
+    @DisplayName("존재하지 않는 CSV 파일은 CsvFileNotFoundException을 던진다")
     void 존재하지_않는_파일() {
-        List<RegionalIndustryCsvRow> rows = csvLoader.load("data/nonexistent.csv", RegionalIndustryCsvRow.class);
-        assertThat(rows).isEmpty();
+        assertThatThrownBy(() -> csvLoader.load("data/nonexistent.csv", RegionalIndustryCsvRow.class))
+            .isInstanceOf(CsvLoader.CsvFileNotFoundException.class)
+            .hasMessageContaining("nonexistent.csv");
     }
 }

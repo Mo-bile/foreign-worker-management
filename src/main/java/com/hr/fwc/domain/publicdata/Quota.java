@@ -15,6 +15,12 @@ public class Quota {
     private Quota(int year, String industry, int quotaCount, String source) {
         this.industry = Objects.requireNonNull(industry);
         this.source = Objects.requireNonNull(source);
+        if (year < 1) {
+            throw new IllegalArgumentException("year must be positive");
+        }
+        if (quotaCount < 0) {
+            throw new IllegalArgumentException("quotaCount cannot be negative");
+        }
         this.year = year;
         this.quotaCount = quotaCount;
     }
