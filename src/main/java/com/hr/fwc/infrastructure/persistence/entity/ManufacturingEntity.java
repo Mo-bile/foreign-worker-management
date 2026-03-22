@@ -10,7 +10,7 @@ public class ManufacturingEntity {
     @Column(name = "snapshot_id", nullable = false, length = 50) private String snapshotId;
     @Column(name = "sub_industry", nullable = false, length = 50) private String subIndustry;
     @Column(name = "worker_count", nullable = false) private int workerCount;
-    @Column(name = "year", nullable = false) private int year;
+    @Column(name = "\"year\"", nullable = false) private int year;
     @Column(name = "reference_date", nullable = false) private LocalDate referenceDate;
 
     public Long getId() { return id; }

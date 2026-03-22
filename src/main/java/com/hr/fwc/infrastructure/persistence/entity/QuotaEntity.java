@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "quota")
 public class QuotaEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
-    @Column(name = "year", nullable = false) private int year;
+    @Column(name = "\"year\"", nullable = false) private int year;
     @Column(name = "industry", nullable = false, length = 30) private String industry;
     @Column(name = "quota_count", nullable = false) private int quotaCount;
     @Column(name = "source", nullable = false, length = 50) private String source;
