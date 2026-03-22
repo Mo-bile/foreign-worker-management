@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ForeignWorkerJpaRepository extends JpaRepository<ForeignWorkerEntity, Long> {
-    List<ForeignWorkerEntity> findByEmploymentInfoWorkplaceId(Long workplaceId);
+    List<ForeignWorkerEntity> findByEmploymentInfoCompanyId(Long companyId);
 
     List<ForeignWorkerEntity> findByNationality(Nationality nationality);
 }

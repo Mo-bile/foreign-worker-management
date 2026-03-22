@@ -34,7 +34,7 @@ public record RegisterWorkerRequest(
     LocalDate contractEndDate,
 
     @Schema(description = "사업장 ID", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
-    Long workplaceId,
+    Long companyId,
 
     @Schema(description = "연락처", example = "010-1234-5678")
     String contactPhone,

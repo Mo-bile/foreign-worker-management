@@ -48,7 +48,7 @@ public class WorkerRegistrationService {
         EmploymentInfo employmentInfo = EmploymentInfo.of(
             request.contractStartDate(),
             request.contractEndDate(),
-            request.workplaceId()
+            request.companyId()
         );
 
         Nationality nationality = Nationality.valueOf(request.nationalityCode());

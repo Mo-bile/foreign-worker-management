@@ -9,19 +9,19 @@ public class EmploymentInfo {
 
     private LocalDate contractEndDate;
 
-    private Long workplaceId;
+    private Long companyId;
 
     protected EmploymentInfo() {
     }
 
-    private EmploymentInfo(LocalDate contractStartDate, LocalDate contractEndDate, Long workplaceId) {
+    private EmploymentInfo(LocalDate contractStartDate, LocalDate contractEndDate, Long companyId) {
         this.contractStartDate = Objects.requireNonNull(contractStartDate, "Contract start date cannot be null");
         this.contractEndDate = contractEndDate;
-        this.workplaceId = workplaceId;
+        this.companyId = companyId;
     }
 
-    public static EmploymentInfo of(LocalDate contractStartDate, LocalDate contractEndDate, Long workplaceId) {
-        return new EmploymentInfo(contractStartDate, contractEndDate, workplaceId);
+    public static EmploymentInfo of(LocalDate contractStartDate, LocalDate contractEndDate, Long companyId) {
+        return new EmploymentInfo(contractStartDate, contractEndDate, companyId);
     }
 
     public boolean isActive() {
@@ -43,8 +43,8 @@ public class EmploymentInfo {
         return contractEndDate;
     }
 
-    public Long workplaceId() {
-        return workplaceId;
+    public Long companyId() {
+        return companyId;
     }
 
 }
