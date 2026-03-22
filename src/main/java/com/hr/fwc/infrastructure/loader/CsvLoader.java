@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
 import java.util.ArrayList;
@@ -44,15 +45,16 @@ public class CsvLoader {
                 totalCount++;
                 try {
                     results.add(iterator.next());
-                } catch (Exception e) {
+                } catch (RuntimeException e) {
+                    // Jackson MappingIterator.next()는 JsonProcessingException을
+                    // RuntimeException으로 래핑하여 던질 수 있어 광범위하게 캐치한다.
                     failureCount++;
                     log.warn("CSV 파싱 실패 ({}:{} 행)", resourcePath, lineNum, e);
                 }
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             throw new UncheckedIOException(
-                "CSV 파일 읽기 실패: " + resourcePath,
-                new java.io.IOException(e));
+                "CSV 파일 읽기 실패: " + resourcePath, e);
         }
 
         if (totalCount > 0 && (double) failureCount / totalCount > MAX_FAILURE_RATIO) {

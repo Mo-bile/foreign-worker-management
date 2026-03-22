@@ -60,6 +60,8 @@ public class PublicDataInitializer implements ApplicationRunner {
             transactionTemplate.executeWithoutResult(status -> loader.run());
         } catch (CsvLoader.CsvFileNotFoundException e) {
             log.warn("  {} — 파일 누락, 스킵: {}", label, e.getMessage());
+        } catch (CsvLoader.CsvParseException e) {
+            log.error("  {} — 데이터 품질 불량 (파싱 실패율 초과): {}", label, e.getMessage());
         } catch (Exception e) {
             log.error("  {} 적재 실패 — 나머지 계속 진행", label, e);
         }
@@ -72,7 +74,7 @@ public class PublicDataInitializer implements ApplicationRunner {
             .filter(Objects::nonNull)
             .toList();
         regionalIndustryRepository.saveAll(domains);
-        log.info("  지역×업종 현황: {}건 적재", domains.size());
+        logLoadResult("지역×업종 현황", rows.size(), domains.size());
     }
 
     private void loadManufacturing(String snapshotId) {
@@ -82,7 +84,7 @@ public class PublicDataInitializer implements ApplicationRunner {
             .filter(Objects::nonNull)
             .toList();
         manufacturingRepository.saveAll(domains);
-        log.info("  제조업 중분류: {}건 적재", domains.size());
+        logLoadResult("제조업 중분류", rows.size(), domains.size());
     }
 
     private void loadVietnamE9(String snapshotId) {
@@ -92,7 +94,16 @@ public class PublicDataInitializer implements ApplicationRunner {
             .filter(Objects::nonNull)
             .toList();
         vietnamE9Repository.saveAll(domains);
-        log.info("  베트남 E-9: {}건 적재", domains.size());
+        logLoadResult("베트남 E-9", rows.size(), domains.size());
+    }
+
+    private void logLoadResult(String label, int totalRows, int loadedCount) {
+        int filtered = totalRows - loadedCount;
+        if (filtered > 0) {
+            log.warn("  {}: {}건 적재, {}건 변환 실패", label, loadedCount, filtered);
+        } else {
+            log.info("  {}: {}건 적재", label, loadedCount);
+        }
     }
 
     private RegionalIndustry safeCreateRegionalIndustry(String snapshotId, RegionalIndustryCsvRow r) {
