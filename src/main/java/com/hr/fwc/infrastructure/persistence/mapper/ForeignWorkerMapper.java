@@ -60,7 +60,7 @@ public final class ForeignWorkerMapper {
         EmploymentInfoEmbeddable embeddable = new EmploymentInfoEmbeddable();
         embeddable.setContractStartDate(employmentInfo.contractStartDate());
         embeddable.setContractEndDate(employmentInfo.contractEndDate());
-        embeddable.setWorkplaceId(employmentInfo.workplaceId());
+        embeddable.setCompanyId(employmentInfo.companyId());
         return embeddable;
     }
 
@@ -86,7 +86,7 @@ public final class ForeignWorkerMapper {
         return EmploymentInfo.of(
             embeddable.getContractStartDate(),
             embeddable.getContractEndDate(),
-            embeddable.getWorkplaceId()
+            embeddable.getCompanyId()
         );
     }
 }

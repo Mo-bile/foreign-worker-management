@@ -8,7 +8,7 @@ public interface ForeignWorkerRepository {
 
     Optional<ForeignWorker> findById(Long id);
 
-    List<ForeignWorker> findByWorkplaceId(Long workplaceId);
+    List<ForeignWorker> findByCompanyId(Long companyId);
 
     List<ForeignWorker> findAll();
 

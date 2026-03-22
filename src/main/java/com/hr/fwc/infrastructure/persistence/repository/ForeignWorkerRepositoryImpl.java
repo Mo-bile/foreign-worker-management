@@ -37,8 +37,8 @@ public class ForeignWorkerRepositoryImpl implements ForeignWorkerRepository {
     }
 
     @Override
-    public List<ForeignWorker> findByWorkplaceId(Long workplaceId) {
-        return jpaRepository.findByEmploymentInfoWorkplaceId(workplaceId)
+    public List<ForeignWorker> findByCompanyId(Long companyId) {
+        return jpaRepository.findByEmploymentInfoCompanyId(companyId)
             .stream()
             .map(ForeignWorkerMapper::toDomain)
             .toList();

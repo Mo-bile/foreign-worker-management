@@ -14,8 +14,8 @@ public class EmploymentInfoEmbeddable {
     @Column(name = "contract_end_date")
     private LocalDate contractEndDate;
 
-    @Column(name = "workplace_id")
-    private Long workplaceId;
+    @Column(name = "company_id")
+    private Long companyId;
 
     public LocalDate getContractStartDate() {
         return contractStartDate;
@@ -33,11 +33,11 @@ public class EmploymentInfoEmbeddable {
         this.contractEndDate = contractEndDate;
     }
 
-    public Long getWorkplaceId() {
-        return workplaceId;
+    public Long getCompanyId() {
+        return companyId;
     }
 
-    public void setWorkplaceId(Long workplaceId) {
-        this.workplaceId = workplaceId;
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
     }
 }
