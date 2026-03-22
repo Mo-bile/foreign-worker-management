@@ -24,3 +24,15 @@ VALUES ('스마트물류(주)', '789-01-23456', 'INCHEON', '서구', 'TRANSPORTA
 
 INSERT INTO companies (name, business_number, region, sub_region, industry_category, industry_sub_category, employee_count, foreign_worker_count, address, contact_phone, created_at)
 VALUES ('코리아호텔', '890-12-34567', 'JEJU', '제주시', 'ACCOMMODATION', NULL, 60, 18, '제주 제주시 관광로 80', '064-890-1234', NOW());
+
+-- Quota seed data (HWP 수동추출 — 플레이스홀더 수치)
+INSERT INTO quota ("year", industry, quota_count, source) VALUES (2025, '제조업', 36000, '도입계획');
+INSERT INTO quota ("year", industry, quota_count, source) VALUES (2025, '농축산업', 8000, '도입계획');
+INSERT INTO quota ("year", industry, quota_count, source) VALUES (2025, '어업', 5000, '도입계획');
+INSERT INTO quota ("year", industry, quota_count, source) VALUES (2025, '건설업', 2000, '도입계획');
+INSERT INTO quota ("year", industry, quota_count, source) VALUES (2025, '서비스업', 1500, '도입계획');
+INSERT INTO quota ("year", industry, quota_count, source) VALUES (2024, '제조업', 34000, 'E-9현황');
+INSERT INTO quota ("year", industry, quota_count, source) VALUES (2024, '농축산업', 7500, 'E-9현황');
+INSERT INTO quota ("year", industry, quota_count, source) VALUES (2024, '어업', 4800, 'E-9현황');
+INSERT INTO quota ("year", industry, quota_count, source) VALUES (2024, '건설업', 1800, 'E-9현황');
+INSERT INTO quota ("year", industry, quota_count, source) VALUES (2024, '서비스업', 1200, 'E-9현황');
