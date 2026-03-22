@@ -23,6 +23,15 @@
 - Claude API 연동 (시뮬레이션 자연어 리포트)
 - 고용허가 시뮬레이터 비즈니스 로직
 - REST API를 통한 CSV 업로드 (갱신용)
+- `public_data_keis_worker` (15105236, 한국고용정보원 마이크로데이터) — 2단계(벤치마크)에서 적재
+
+### SPEC 대비 설계 결정 사항
+- `bizNumber` (SPEC) → `businessNumber` (설계): 기존 코드베이스 컨벤션 유지
+- `contactPhone` (기존) → `contactPhone` (설계): 기존 필드명 유지
+- `address`, `contactPhone`: SPEC Company 모델에는 없으나 기존 코드에 있으므로 유지 (SPEC 확장)
+- `GET /api/companies` (목록 조회): SPEC에는 명시 안 됨, 실용적 필요에 의해 추가
+- `snapshotId`: SPEC 테이블 정의에는 없으나 SPEC 4-1 적재 방식에서 요구, 모든 공공데이터에 적용
+- `reconstitute()`: 기존 코드베이스의 팩토리 메서드 네이밍 컨벤션 따름
 
 ---
 
@@ -41,11 +50,11 @@ public class Company {
     private int employeeCount;          // 상시 근로자 수
     private int foreignWorkerCount;     // 외국인 근로자 수
     private String address;             // 기존 유지
-    private String contactNumber;       // 기존 유지
+    private String contactPhone;        // 기존 필드명 유지
     private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private LocalDateTime updatedAt;    // 인프라 계층(@PreUpdate)에서 자동 설정
 
-    // 팩토리 메서드: create(), reconstruct()
+    // 팩토리 메서드: create(), reconstitute() — 기존 네이밍 컨벤션
     // 불변 업데이트: updateInfo() → 새 Company 반환
 }
 ```
@@ -55,7 +64,7 @@ public class Company {
 | 기존 | 변경 후 |
 |------|---------|
 | `domain/workplace/Workplace` | `domain/company/Company` |
-| `domain/workplace/WorkplaceRepository` | `domain/company/CompanyRepository` |
+| `domain/workplace/WorkplaceRepository` | `domain/company/CompanyRepository` (findAll() 추가) |
 | `infrastructure/.../WorkplaceEntity` | `infrastructure/.../CompanyEntity` |
 | `infrastructure/.../WorkplaceJpaRepository` | `infrastructure/.../CompanyJpaRepository` |
 | `infrastructure/.../WorkplaceRepositoryImpl` | `infrastructure/.../CompanyRepositoryImpl` |
@@ -64,6 +73,7 @@ public class Company {
 | `RegisterWorkerRequest.workplaceId` | `RegisterWorkerRequest.companyId` |
 | `WorkerRegistrationService` 내 workplace 참조 | company 참조 |
 | `data.sql` 테이블명/컬럼명 | company 기준으로 변경 |
+| `Workplace.contactPhone` | `Company.contactPhone` (필드명 유지) |
 | 관련 테스트 전부 | 리네이밍 반영 |
 
 ### 2-3. Company CRUD API
@@ -80,17 +90,34 @@ public class Company {
 ```java
 // CreateCompanyRequest
 { name, businessNumber, region, industryCode, employeeCount,
-  foreignWorkerCount, address, contactNumber }
+  foreignWorkerCount, address, contactPhone }
 
 // UpdateCompanyRequest
 { name, region, industryCode, employeeCount,
-  foreignWorkerCount, address, contactNumber }
+  foreignWorkerCount, address, contactPhone }
 // businessNumber는 수정 불가 (사업자등록번호는 불변)
 
 // CompanyResponse
 { id, name, businessNumber, region, industryCode, employeeCount,
-  foreignWorkerCount, address, contactNumber, createdAt, updatedAt }
+  foreignWorkerCount, address, contactPhone, createdAt, updatedAt }
 ```
+
+### 2-4. Application / Presentation 계층
+
+```
+application/service/
+├── CompanyService.java              # 신규 — CRUD 로직
+│   ├── createCompany(CreateCompanyRequest) → CompanyResponse
+│   ├── getCompany(Long id) → CompanyResponse
+│   ├── getAllCompanies() → List<CompanyResponse>
+│   └── updateCompany(Long id, UpdateCompanyRequest) → CompanyResponse
+
+presentation/
+├── api/CompanyApi.java              # 신규 — Swagger 인터페이스 (기존 패턴 따름)
+├── CompanyController.java           # 신규 — CompanyApi 구현
+```
+
+> 기존 패턴: `WorkerApi` 인터페이스 → `WorkerController` 구현. Company도 동일하게 적용.
 
 ---
 
@@ -110,7 +137,7 @@ public class Company {
 // VietnamE9 (15111729 — 베트남 E-9)
 { id, snapshotId, industry, totalCount, maleCount, femaleCount, referenceDate }
 
-// Quota (HWP 수동추출 — data.sql 시드)
+// Quota (HWP 수동추출 — data.sql 시드, snapshotId 없음 — 수동 관리 데이터)
 { id, year, industry, quotaCount, source }
 ```
 
